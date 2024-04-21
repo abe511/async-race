@@ -14,7 +14,10 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": [
+      "vite-plugin-svgr/client"
+    ]
   },
   "include": ["./src/**/*", ".eslintrc.cjs", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
