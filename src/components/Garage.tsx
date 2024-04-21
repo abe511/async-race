@@ -1,4 +1,6 @@
 import Controls from './Controls';
+import Track from './Track';
+import Car from './Car';
 import Pagination from './Pagination';
 
 const Garage = () => {
@@ -6,7 +8,8 @@ const Garage = () => {
     <>
       <h3>garage</h3>
       <Controls />
-      <article>track</article>
+      <Track />
+      <Car />
       <Pagination />
     </>
   );
