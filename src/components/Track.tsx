@@ -1,3 +1,7 @@
+import Grid from './Grid';
+
+const LANE_COUNT = 7;
+
 const trackStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
@@ -45,15 +49,32 @@ const createLanes = (quantity: number) => {
   return lanes;
 };
 
-const Track = () => {
+type TrackProps = {
+  cars: CarData[];
+  removeCar: RemoveCar;
+  setCars: SetCars;
+  setError: SetError;
+  setSelected: SetSelected;
+};
+
+const Track = ({ cars, removeCar, setCars, setError, setSelected }: TrackProps) => {
   return (
-    <div style={trackStyle}>
-      <span style={startStyle} />
-      <span>START</span>
-      <span style={laneContainerStyle}>{createLanes(7)}</span>
-      <span>FINISH</span>
-      <span style={finishStyle} />
-    </div>
+    <>
+      <div style={trackStyle}>
+        <span style={startStyle} />
+        <span>START</span>
+        <span style={laneContainerStyle}>{createLanes(LANE_COUNT)}</span>
+        <span>FINISH</span>
+        <span style={finishStyle} />
+      </div>
+      <Grid
+        cars={cars}
+        removeCar={removeCar}
+        setCars={setCars}
+        setError={setError}
+        setSelected={setSelected}
+      />
+    </>
   );
 };
 
