@@ -19,6 +19,6 @@
       "vite-plugin-svgr/client"
     ]
   },
-  "include": ["./src/**/*", ".eslintrc.cjs", "vite.config.ts"],
+  "include": ["./src/**/*", ".eslintrc.cjs", "vite.config.ts", "types.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
