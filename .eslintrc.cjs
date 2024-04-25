@@ -24,7 +24,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     tsconfigRootDir: __dirname,
-    project: 'tsconfig.json',
+    project: ['tsconfig.json', 'types.d.ts'],
   },
   plugins: ['@typescript-eslint', 'react', 'prettier', 'react-hooks'],
   rules: {
@@ -43,6 +43,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-var-requires': 'off',
     'react/jsx-uses-react': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
       2,
@@ -51,6 +52,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'max-lines-per-function': ['error', 40],
   },
   settings: {
     react: {
