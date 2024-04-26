@@ -1,5 +1,29 @@
 const BASE_URL = 'http://127.0.0.1:3000';
 
+export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> => {
+  try {
+    const result = await Promise.all(
+      payload.map(async (car) => {
+        const response = await fetch(`${BASE_URL}/garage`, {
+          method: 'POST',
+          body: JSON.stringify(car),
+          headers: {
+            'Content-type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to add cars');
+        }
+        const data = await response.json();
+        return data;
+      })
+    );
+    return result;
+  } catch (error) {
+    return [];
+  }
+};
+
 export const getCars = async (): Promise<CarData[] | []> => {
   try {
     const response = await fetch(`${BASE_URL}/garage`);
