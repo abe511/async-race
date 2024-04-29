@@ -49,15 +49,15 @@ const createLanes = (quantity: number) => {
   return lanes;
 };
 
-type TrackProps = {
-  cars: CarData[];
-  removeCar: RemoveCar;
-  setCars: SetCars;
-  setError: SetError;
-  setSelected: SetSelected;
-};
+// type TrackProps = {
+//   cars: CarData[];
+//   removeCar: RemoveCar;
+//   setCars: SetCars;
+//   setError: SetError;
+//   setSelected: SetSelected;
+// };
 
-const Track = ({ cars, removeCar, setCars, setError, setSelected }: TrackProps) => {
+const Track = () => {
   return (
     <>
       <div style={trackStyle}>
@@ -67,13 +67,7 @@ const Track = ({ cars, removeCar, setCars, setError, setSelected }: TrackProps) 
         <span>FINISH</span>
         <span style={finishStyle} />
       </div>
-      <Grid
-        cars={cars}
-        removeCar={removeCar}
-        setCars={setCars}
-        setError={setError}
-        setSelected={setSelected}
-      />
+      <Grid />
     </>
   );
 };

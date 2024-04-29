@@ -1,23 +1,31 @@
+import { useContext } from 'react';
+import GarageContext from 'components/context/GarageContext';
 import Create from './Create';
 import Update from './Update';
+import generate from './Generate';
 
-type DashboardProps = {
-  id: number;
-  cars: CarData[];
-  setCars: SetCars;
-  setError: SetError;
-  addCar: AddCar;
-  updateCar: UpdateCar;
-};
+// type DashboardProps = {
+//   id: number;
+//   setCars: SetCars;
+//   setError: SetError;
+//   addCar: AddCar;
+//   updateCar: UpdateCar;
+// };
 
-const Dashboard = ({ id, cars, setCars, setError, addCar, updateCar }: DashboardProps) => {
+// const Dashboard = ({ id, setCars, setError, addCar, updateCar }: DashboardProps) => {
+const Dashboard = () => {
+  const { setCars, setError } = useContext(GarageContext);
+
+  const quantity = 100;
   return (
     <>
       <button type="button">RACE</button>
       <button type="button">RESET</button>
-      <Create addCar={addCar} cars={cars} setCars={setCars} setError={setError} />
-      <Update id={id} updateCar={updateCar} cars={cars} setCars={setCars} setError={setError} />
-      <button type="button">GENERATE CARS</button>
+      <Create />
+      <Update />
+      <button type="button" onClick={() => generate(quantity, setCars, setError)}>
+        GENERATE CARS
+      </button>
     </>
   );
 };

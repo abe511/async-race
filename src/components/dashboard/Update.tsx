@@ -1,24 +1,23 @@
-import { useState } from 'react';
-import handleInputChange from '../../utils/garageUtils';
+import { useState, useContext } from 'react';
+import GarageContext from 'components/context/GarageContext';
+import { handleInputChange } from '../../utils/garageUtils';
 
-type UpdateProps = {
-  id: number;
-  cars: CarData[];
-  setCars: SetCars;
-  setError: SetError;
-  updateCar: UpdateCar;
-};
+// type UpdateProps = {
+//   id: number;
+//   setCars: React.Dispatch<CarData[]>;
+//   setError: React.Dispatch<string | null>;
+//   updateCar: UpdateCar;
+// };
 
 type HandleUpdate = (
   id: number,
   name: string,
   color: string,
   updateCar: UpdateCar,
-  cars: CarData[],
-  setCars: SetCars,
-  setError: SetError,
-  setUpdateName: InputSetter,
-  setUpdateColor: InputSetter
+  setCars: React.Dispatch<CarData[]>,
+  setError: React.Dispatch<string | null>,
+  setUpdName: React.Dispatch<string>,
+  setUpdColor: React.Dispatch<string>
 ) => void;
 
 const handleUpdate: HandleUpdate = async (
@@ -26,48 +25,34 @@ const handleUpdate: HandleUpdate = async (
   name,
   color,
   updateCar,
-  cars,
   setCars,
   setError,
-  setUpdateName,
-  setUpdateColor
+  setUpdName,
+  setUpdColor
 ) => {
   const carUpdate = { id, name, color };
-  updateCar(carUpdate, cars, setCars, setError);
-  handleInputChange(null, setUpdateName);
-  handleInputChange(null, setUpdateColor);
+  updateCar(carUpdate, setCars, setError);
+  handleInputChange(null, setUpdName);
+  handleInputChange(null, setUpdColor);
 };
 
-const Update = ({ id, cars, setCars, setError, updateCar }: UpdateProps) => {
-  const [updateName, setUpdateName] = useState('');
-  const [updateColor, setUpdateColor] = useState('');
+const Update = () => {
+  const [updName, setUpdName] = useState('');
+  const [updColor, setUpdColor] = useState('');
+  const { id, setCars, setError, updateCar } = useContext(GarageContext);
   return (
     <>
       <input
         type="text"
         placeholder="Enter Make"
-        value={updateName}
-        onChange={(e) => handleInputChange(e, setUpdateName)}
+        value={updName}
+        onChange={(e) => handleInputChange(e, setUpdName)}
       />
-      <input
-        type="color"
-        value={updateColor}
-        onChange={(e) => handleInputChange(e, setUpdateColor)}
-      />
+      <input type="color" value={updColor} onChange={(e) => handleInputChange(e, setUpdColor)} />
       <button
         type="button"
         onClick={() =>
-          handleUpdate(
-            id,
-            updateName,
-            updateColor,
-            updateCar,
-            cars,
-            setCars,
-            setError,
-            setUpdateName,
-            setUpdateColor
-          )
+          handleUpdate(id, updName, updColor, updateCar, setCars, setError, setUpdName, setUpdColor)
         }
       >
         UPDATE

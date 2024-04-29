@@ -1,3 +1,5 @@
+import { getCars, createCar, updateCarData, deleteCarData } from 'api/garageApi';
+
 const names = [
   'Porsche 911',
   'Chevrolet Corvette',
@@ -59,4 +61,60 @@ export const handleInputChange = (
   setter: InputSetter
 ) => {
   setter(e?.target.value || '');
+};
+
+export const addCar: AddCar = async (payload, setCars, setError) => {
+  try {
+    const newCar = await createCar(payload);
+    if (!newCar) {
+      throw new Error('Failed to create a car');
+    }
+    setCars((prev: CarData[]) => [...prev, newCar]);
+  } catch (error) {
+    if (error instanceof Error) {
+      setError(error.message);
+    }
+  }
+};
+
+export const fetchCars: FetchCars = async (setCars, setError) => {
+  try {
+    const data = await getCars();
+    setCars(data);
+    if (!data.length) {
+      throw new Error('No car data');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      setError(error.message);
+    }
+  }
+};
+
+export const updateCar: UpdateCar = async (updatedCar, setCars, setError) => {
+  try {
+    const data = await updateCarData(updatedCar);
+    if (!data) {
+      throw new Error('Failed to update the car');
+    }
+    setCars((prev: CarData[]) => prev.map((car) => (car.id === updatedCar.id ? updatedCar : car)));
+  } catch (error) {
+    if (error instanceof Error) {
+      setError(error.message);
+    }
+  }
+};
+
+export const removeCar: RemoveCar = async (id, setCars, setError) => {
+  try {
+    const data = await deleteCarData(id);
+    if (!data) {
+      throw new Error('Failed to remove the car');
+    }
+    setCars((prev: CarData[]) => prev.filter((car) => car.id !== id));
+  } catch (error) {
+    if (error instanceof Error) {
+      setError(error.message);
+    }
+  }
 };

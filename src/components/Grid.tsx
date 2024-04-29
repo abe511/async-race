@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import GarageContext from './context/GarageContext';
 import Car from './Car';
 
 type CarData = {
@@ -6,15 +8,16 @@ type CarData = {
   color: string;
 };
 
-type GridProps = {
-  cars: CarData[];
-  removeCar: RemoveCar;
-  setCars: SetCars;
-  setError: SetError;
-  setSelected: SetSelected;
-};
+// type GridProps = {
+//   cars: CarData[];
+//   removeCar: RemoveCar;
+//   setCars: SetCars;
+//   setError: SetError;
+//   setSelected: SetSelected;
+// };
 
-const Grid = ({ cars, removeCar, setCars, setError, setSelected }: GridProps) => {
+const Grid = () => {
+  const { cars, removeCar, setCars, setError, setSelected } = useContext(GarageContext);
   return (
     <>
       {cars.map((car: CarData) => {
@@ -24,7 +27,6 @@ const Grid = ({ cars, removeCar, setCars, setError, setSelected }: GridProps) =>
             id={car.id}
             name={car.name}
             color={car.color}
-            cars={cars}
             removeCar={removeCar}
             setCars={setCars}
             setError={setError}

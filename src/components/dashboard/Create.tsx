@@ -1,43 +1,43 @@
-import { useState } from 'react';
-import handleInputChange from '../../utils/garageUtils';
+import { useState, useContext } from 'react';
+// import GarageContext from 'components/GarageContext';
+import GarageContext from '../context/GarageContext';
+import { handleInputChange } from '../../utils/garageUtils';
 
-type CreateProps = {
-  cars: CarData[];
-  setCars: SetCars;
-  setError: SetError;
-  addCar: AddCar;
-};
+// type CreateProps = {
+//   setCars: React.Dispatch<CarData[]>;
+//   setError: React.Dispatch<string | null>;
+//   addCar: AddCar;
+// };
 
 type HandleCreate = (
   name: string,
   color: string,
   addCar: AddCar,
-  cars: CarData[],
   setCars: SetCars,
   setError: SetError,
-  setNewName: InputSetter,
-  setNewColor: InputSetter
+  setNewName: React.Dispatch<string>,
+  setNewColor: React.Dispatch<string>
 ) => void;
 
 const handleCreate: HandleCreate = async (
   name,
   color,
   addCar,
-  cars,
   setCars,
   setError,
   setNewName,
   setNewColor
 ) => {
   const payload: NewCarData = { name, color };
-  addCar(payload, cars, setCars, setError);
+  addCar(payload, setCars, setError);
   handleInputChange(null, setNewName);
   handleInputChange(null, setNewColor);
 };
 
-const Create = ({ cars, setCars, setError, addCar }: CreateProps) => {
+const Create = () => {
   const [newName, setNewName] = useState('');
   const [newColor, setNewColor] = useState('');
+  const { setCars, setError, addCar } = useContext(GarageContext);
 
   return (
     <>
@@ -51,7 +51,7 @@ const Create = ({ cars, setCars, setError, addCar }: CreateProps) => {
       <button
         type="button"
         onClick={() =>
-          handleCreate(newName, newColor, addCar, cars, setCars, setError, setNewName, setNewColor)
+          handleCreate(newName, newColor, addCar, setCars, setError, setNewName, setNewColor)
         }
       >
         CREATE
