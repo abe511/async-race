@@ -4,15 +4,6 @@ import Create from './Create';
 import Update from './Update';
 import generate from './Generate';
 
-// type DashboardProps = {
-//   id: number;
-//   setCars: SetCars;
-//   setError: SetError;
-//   addCar: AddCar;
-//   updateCar: UpdateCar;
-// };
-
-// const Dashboard = ({ id, setCars, setError, addCar, updateCar }: DashboardProps) => {
 const Dashboard = () => {
   const { setCars, setError } = useContext(GarageContext);
 

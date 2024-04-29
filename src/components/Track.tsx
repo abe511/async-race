@@ -49,14 +49,6 @@ const createLanes = (quantity: number) => {
   return lanes;
 };
 
-// type TrackProps = {
-//   cars: CarData[];
-//   removeCar: RemoveCar;
-//   setCars: SetCars;
-//   setError: SetError;
-//   setSelected: SetSelected;
-// };
-
 const Track = () => {
   return (
     <>

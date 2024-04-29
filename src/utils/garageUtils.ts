@@ -56,13 +56,6 @@ export const generateCars = (quantity: number): NewCarData[] => {
   return cars;
 };
 
-export const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement> | null,
-  setter: InputSetter
-) => {
-  setter(e?.target.value || '');
-};
-
 export const addCar: AddCar = async (payload, setCars, setError) => {
   try {
     const newCar = await createCar(payload);
@@ -117,4 +110,11 @@ export const removeCar: RemoveCar = async (id, setCars, setError) => {
       setError(error.message);
     }
   }
+};
+
+export const handleInputChange = (
+  e: React.ChangeEvent<HTMLInputElement> | null,
+  setter: InputSetter
+) => {
+  setter(e?.target.value || '');
 };

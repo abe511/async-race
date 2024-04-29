@@ -1,13 +1,6 @@
 import { useState, useContext } from 'react';
-// import GarageContext from 'components/GarageContext';
 import GarageContext from '../context/GarageContext';
 import { handleInputChange } from '../../utils/garageUtils';
-
-// type CreateProps = {
-//   setCars: React.Dispatch<CarData[]>;
-//   setError: React.Dispatch<string | null>;
-//   addCar: AddCar;
-// };
 
 type HandleCreate = (
   name: string,
