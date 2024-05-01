@@ -1,14 +1,18 @@
+import { useContext } from 'react';
+import GarageContext from 'components/context/GarageContext';
 import { generateCars } from 'utils/garageUtils';
-import { addCars } from 'api/garageApi';
 
-const generate = async (quantity: number, setCars: SetCars, setError: SetError) => {
-  const cars = generateCars(quantity);
-  const result = await addCars(cars);
-  if (!result.length) {
-    setError('Failed to add cars');
-  } else {
-    setCars((prev: CarData[]) => [...prev, ...result]);
-  }
+type GenerateProps = {
+  quantity: number;
 };
 
-export default generate;
+const Generate = ({ quantity }: GenerateProps) => {
+  const { setCars, setError } = useContext(GarageContext);
+  return (
+    <button type="button" onClick={() => generateCars(quantity, setCars, setError)}>
+      GENERATE CARS
+    </button>
+  );
+};
+
+export default Generate;
