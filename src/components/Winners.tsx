@@ -1,9 +1,10 @@
 import Pagination from './Pagination';
+import Title from './Title';
 
 const Winners = () => {
   return (
     <>
-      <h3>winners</h3>
+      <Title title="WINNERS" />
       <table>
         <thead>
           <tr>

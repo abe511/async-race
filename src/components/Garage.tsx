@@ -3,9 +3,10 @@ import Dashboard from './dashboard/Dashboard';
 import Track from './Track';
 import Pagination from './Pagination';
 import GarageContext from './context/GarageContext';
+import Title from './Title';
 
 const Garage = () => {
-  const { fetchCars, setCars, error, setError } = useContext(GarageContext);
+  const { fetchCars, setCars, setError } = useContext(GarageContext);
 
   useEffect(() => {
     fetchCars(setCars, setError);
@@ -13,7 +14,7 @@ const Garage = () => {
 
   return (
     <>
-      <h3>garage {error}</h3>
+      <Title title="GARAGE" />
       <Dashboard />
       <Track />
       <Pagination />
