@@ -1,12 +1,13 @@
 import { getCars, createCar, addCars, updateCarData, deleteCarData } from 'api/garageApi';
-import { names, colors } from './data';
+import { makes, models, colors } from './data';
 
 const generator = (quantity: number): NewCarData[] => {
   const cars: NewCarData[] = [];
   for (let i = 0; i < quantity; i += 1) {
-    const newName = names[Math.floor(Math.random() * names.length)];
-    const newColor = colors[Math.floor(Math.random() * colors.length)];
-    cars.push({ name: newName, color: newColor });
+    const make = makes[Math.floor(Math.random() * makes.length)];
+    const model = models[Math.floor(Math.random() * models.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    cars.push({ name: `${make} ${model}`, color });
   }
   return cars;
 };
