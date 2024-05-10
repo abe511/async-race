@@ -12,11 +12,13 @@ const App = () => {
     <Router>
       <GarageContextProvider>
         <Header />
-        <Routes>
-          <Route path="/" element={<Garage />} />
-          <Route path="/winners" element={<Winners />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Garage />} />
+            <Route path="/winners" element={<Winners />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
       </GarageContextProvider>
     </Router>
   );
