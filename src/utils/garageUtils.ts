@@ -1,5 +1,43 @@
 import { getCars, createCar, addCars, updateCarData, deleteCarData } from 'api/garageApi';
-import { makes, models, colors } from './data';
+import { makes, models, colors, defaultEngineData } from './data';
+
+export const handleInputChange = (
+  e: React.ChangeEvent<HTMLInputElement> | null,
+  setter: InputSetter
+) => {
+  setter(e?.target.value || '');
+};
+
+export const handleCreate: HandleCreate = async (
+  name,
+  color,
+  addCar,
+  setCars,
+  setError,
+  setNewName,
+  setNewColor
+) => {
+  const payload: NewCarData = { name, color };
+  addCar(payload, setCars, setError);
+  handleInputChange(null, setNewName);
+  handleInputChange(null, setNewColor);
+};
+
+export const handleUpdate: HandleUpdate = async (
+  id,
+  name,
+  color,
+  updateCar,
+  setCars,
+  setError,
+  setUpdName,
+  setUpdColor
+) => {
+  const carUpdate = { id, name, color };
+  updateCar(carUpdate, setCars, setError);
+  handleInputChange(null, setUpdName);
+  handleInputChange(null, setUpdColor);
+};
 
 const generator = (quantity: number): NewCarData[] => {
   const cars: NewCarData[] = [];
@@ -36,10 +74,15 @@ export const addCar: AddCar = async (payload, setCars, setError) => {
   }
 };
 
+// get car data from the server
+// add 'status' and 'time' properties to each car stored locally
 export const fetchCars: FetchCars = async (setCars, setError) => {
   try {
     const data = await getCars();
-    setCars(data);
+    const localData = data.map((car) => {
+      return { ...car, ...defaultEngineData };
+    });
+    setCars(localData);
     if (!data.length) {
       throw new Error('No car data');
     }
@@ -50,13 +93,16 @@ export const fetchCars: FetchCars = async (setCars, setError) => {
   }
 };
 
+// modify 'name' and 'color' properties only
 export const updateCar: UpdateCar = async (updatedCar, setCars, setError) => {
   try {
     const data = await updateCarData(updatedCar);
     if (!data) {
       throw new Error('Failed to update the car');
     }
-    setCars((prev: CarData[]) => prev.map((car) => (car.id === updatedCar.id ? updatedCar : car)));
+    setCars((prev: CarData[]) =>
+      prev.map((car) => (car.id === updatedCar.id ? { ...car, ...updatedCar } : car))
+    );
   } catch (error) {
     if (error instanceof Error) {
       setError(error.message);
@@ -76,11 +122,4 @@ export const removeCar: RemoveCar = async (id, setCars, setError) => {
       setError(error.message);
     }
   }
-};
-
-export const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement> | null,
-  setter: InputSetter
-) => {
-  setter(e?.target.value || '');
 };

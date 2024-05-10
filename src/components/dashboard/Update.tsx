@@ -1,40 +1,13 @@
 import { useState, useContext } from 'react';
 import GarageContext from 'components/context/GarageContext';
-import { handleInputChange } from '../../utils/garageUtils';
-
-type HandleUpdate = (
-  id: number,
-  name: string,
-  color: string,
-  updateCar: UpdateCar,
-  setCars: React.Dispatch<CarData[]>,
-  setError: React.Dispatch<string | null>,
-  setUpdName: React.Dispatch<string>,
-  setUpdColor: React.Dispatch<string>
-) => void;
-
-const handleUpdate: HandleUpdate = async (
-  id,
-  name,
-  color,
-  updateCar,
-  setCars,
-  setError,
-  setUpdName,
-  setUpdColor
-) => {
-  const carUpdate = { id, name, color };
-  updateCar(carUpdate, setCars, setError);
-  handleInputChange(null, setUpdName);
-  handleInputChange(null, setUpdColor);
-};
+import { handleInputChange, handleUpdate } from '../../utils/garageUtils';
 
 const Update = () => {
   const [updName, setUpdName] = useState('');
   const [updColor, setUpdColor] = useState('');
   const { id, setCars, setError, updateCar } = useContext(GarageContext);
   return (
-    <>
+    <article className="update">
       <input
         type="text"
         placeholder="Enter Make"
@@ -50,7 +23,7 @@ const Update = () => {
       >
         UPDATE
       </button>
-    </>
+    </article>
   );
 };
 

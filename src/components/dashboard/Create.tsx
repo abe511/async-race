@@ -1,31 +1,6 @@
 import { useState, useContext } from 'react';
 import GarageContext from '../context/GarageContext';
-import { handleInputChange } from '../../utils/garageUtils';
-
-type HandleCreate = (
-  name: string,
-  color: string,
-  addCar: AddCar,
-  setCars: SetCars,
-  setError: SetError,
-  setNewName: React.Dispatch<string>,
-  setNewColor: React.Dispatch<string>
-) => void;
-
-const handleCreate: HandleCreate = async (
-  name,
-  color,
-  addCar,
-  setCars,
-  setError,
-  setNewName,
-  setNewColor
-) => {
-  const payload: NewCarData = { name, color };
-  addCar(payload, setCars, setError);
-  handleInputChange(null, setNewName);
-  handleInputChange(null, setNewColor);
-};
+import { handleInputChange, handleCreate } from '../../utils/garageUtils';
 
 const Create = () => {
   const [newName, setNewName] = useState('');
@@ -33,7 +8,7 @@ const Create = () => {
   const { setCars, setError, addCar } = useContext(GarageContext);
 
   return (
-    <>
+    <article className="create">
       <input
         type="text"
         placeholder="Enter Make"
@@ -49,7 +24,7 @@ const Create = () => {
       >
         CREATE
       </button>
-    </>
+    </article>
   );
 };
 
