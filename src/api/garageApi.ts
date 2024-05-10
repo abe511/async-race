@@ -69,7 +69,8 @@ export const createCar = async (payload: NewCarData): Promise<CarData | null> =>
   }
 };
 
-export const updateCarData = async ({ id, ...payload }: CarData): Promise<CarData | null> => {
+// export const updateCarData = async ({ id, ...payload }: CarData): Promise<CarData | null> => {
+export const updateCarData = async ({ id, ...payload }: CarUpdateData): Promise<CarData | null> => {
   try {
     const response = await fetch(`${BASE_URL}/garage/${id}`, {
       method: 'PUT',
@@ -99,6 +100,39 @@ export const deleteCarData = async (id: number): Promise<CarData | null> => {
     const data = await response.json();
     return data;
   } catch (error) {
+    return null;
+  }
+};
+
+// handles all car status change requests ('started' | 'stopped' | 'drive')
+// WORKING except patch error handling
+export const engineControl = async (
+  id: number,
+  status: string
+): Promise<EngineData | EngineStatus | null> => {
+  const params = { id: id.toString(), status };
+  const query = new URLSearchParams(params).toString();
+
+  try {
+    const response = await fetch(`${BASE_URL}/engine/?${query}`, {
+      method: 'PATCH',
+    });
+    // for 'drive' mode only
+    if (status === 'drive' && response.status === 500) {
+      throw new Error('Engine failure');
+    }
+    // for all modes
+    if (!response.ok) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message === 'Engine failure') {
+        return { success: false };
+      }
+    }
     return null;
   }
 };
