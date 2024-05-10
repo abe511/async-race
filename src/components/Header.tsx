@@ -2,10 +2,10 @@ import Navigation from './Navigation';
 
 const Header = () => {
   return (
-    <>
-      <h1>ASYNC RACE</h1>
+    <header>
+      <span className="main-header">ASYNC RACE</span>
       <Navigation />
-    </>
+    </header>
   );
 };
 
