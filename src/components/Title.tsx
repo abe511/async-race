@@ -8,9 +8,10 @@ const Title = ({ title }: TitleProps) => {
   const { error } = useContext(GarageContext);
 
   return (
-    <h3>
-      {title} {error}
-    </h3>
+    <section>
+      <h3>{title}</h3>
+      <span>{error}</span>
+    </section>
   );
 };
 
