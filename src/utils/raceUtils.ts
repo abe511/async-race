@@ -8,7 +8,6 @@ export const showWinner = async (
   cars: CarData[],
   results: PromiseSettledResult<RaceResults>[],
   setCars: SetCars,
-  setError: SetError,
   setWinnerModalData: SetState
 ) => {
   const fastestCar = { id: -1, time: Infinity };
@@ -21,7 +20,8 @@ export const showWinner = async (
 
   const winner = cars.filter((car: CarData) => car.id === fastestCar.id);
   if (!winner.length) {
-    setError('No winner');
+    setWinnerModalData({ open: true, id: -1, name: '', time: Infinity });
+
     return;
   }
   setCars((prev: CarData[]) =>
@@ -38,7 +38,6 @@ export const showWinner = async (
     })
   );
   setWinnerModalData({ open: true, id: winner[0].id, name: winner[0].name, time: fastestCar.time });
-  setError(`${winner[0].id} ${winner[0].name} WINS: ${fastestCar.time}`);
 };
 
 export const raceRequests = (cars: CarData[], setCars: SetCars, raceStartTime: number) => {
@@ -91,7 +90,7 @@ export const handleRace = async (
     const requests = raceRequests(cars, setCars, raceStartTime);
     const raceResponses: PromiseSettledResult<RaceResults>[] = await Promise.allSettled(requests);
     // SHOW THE WINNER
-    showWinner(cars, raceResponses, setCars, setError, setWinnerModalData);
+    showWinner(cars, raceResponses, setCars, setWinnerModalData);
   } catch (error) {
     if (error instanceof Error) {
       setError(error.message);

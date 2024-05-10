@@ -17,8 +17,19 @@ const ModalOverlay = styled.div`
 const Winner = styled.article`
   background-color: rgba(50, 50, 50, 0.8);
   width: 30%;
-  // height: 10%;
-  border: 1px solid red;
+  border: 1px solid violet;
+  padding: 1rem;
+  border-radius: 0.5rem;
+`;
+
+const Title = styled.p`
+  font-size: largest;
+  font-weight: bold;
+`;
+
+const Text = styled.p`
+  font-size: larger;
+  font-weight: bold;
 `;
 
 const handleClose = (setWinnerModalData: SetState) => {
@@ -33,10 +44,16 @@ const WinnerModal = () => {
   return (
     <ModalOverlay onClick={() => handleClose(setWinnerModalData)}>
       <Winner>
-        <h3>WINNER</h3>
-        <p>{winnerModalData.id}</p>
-        <p>{winnerModalData.name}</p>
-        <p>{winnerModalData.time / 1000} seconds</p>
+        {winnerModalData.id === -1 ? (
+          <Text>No winner</Text>
+        ) : (
+          <>
+            <Title>WINNER</Title>
+            <Text>{winnerModalData.id}</Text>
+            <Text>{winnerModalData.name}</Text>
+            <Text>{winnerModalData.time / 1000} seconds</Text>
+          </>
+        )}
       </Winner>
     </ModalOverlay>
   );
