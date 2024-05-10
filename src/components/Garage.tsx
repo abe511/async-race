@@ -4,6 +4,7 @@ import Track from './Track';
 import Pagination from './Pagination';
 import GarageContext from './context/GarageContext';
 import Title from './Title';
+import WinnerModal from './WinnerModal';
 
 const Garage = () => {
   const { fetchCars, setCars, setError } = useContext(GarageContext);
@@ -15,6 +16,7 @@ const Garage = () => {
   return (
     <>
       <Title title="GARAGE" />
+      <WinnerModal />
       <Dashboard />
       <Track />
       <Pagination />

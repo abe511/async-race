@@ -30,6 +30,13 @@ type CarStatus = {
   wins?: number;
 };
 
+type WinnerModal = {
+  open: boolean;
+  id: number;
+  name: string;
+  time: number;
+};
+
 type RaceResults = { id: number; time: number };
 
 type FetchCars = (setCars: SetCars, setError: SetError) => void;
