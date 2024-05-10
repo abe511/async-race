@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import GarageContext from './context/GarageContext';
-import Car from './Car';
+import Car from './car/Car';
 
 const Grid = () => {
-  const { cars, removeCar, setCars, setError, setSelected } = useContext(GarageContext);
+  const { cars } = useContext(GarageContext);
+
   return (
     <>
       {cars.map((car: CarData) => {
@@ -13,10 +14,8 @@ const Grid = () => {
             id={car.id}
             name={car.name}
             color={car.color}
-            removeCar={removeCar}
-            setCars={setCars}
-            setError={setError}
-            setSelected={setSelected}
+            status={car.status}
+            time={car.time}
           />
         );
       })}
