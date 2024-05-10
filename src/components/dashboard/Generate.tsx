@@ -9,9 +9,11 @@ type GenerateProps = {
 const Generate = ({ quantity }: GenerateProps) => {
   const { setCars, setError } = useContext(GarageContext);
   return (
-    <button type="button" onClick={() => generateCars(quantity, setCars, setError)}>
-      GENERATE CARS
-    </button>
+    <article className="generate">
+      <button type="button" onClick={() => generateCars(quantity, setCars, setError)}>
+        GENERATE CARS
+      </button>
+    </article>
   );
 };
 
