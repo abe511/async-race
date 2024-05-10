@@ -4,10 +4,10 @@ const Navigation = () => {
   return (
     <nav>
       <Link to="/">
-        <button type="button">Garage</button>
+        <button type="button">GARAGE</button>
       </Link>
       <Link to="/winners">
-        <button type="button">Winners</button>
+        <button type="button">WINNERS</button>
       </Link>
     </nav>
   );
