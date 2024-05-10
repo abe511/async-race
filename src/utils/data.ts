@@ -1,3 +1,5 @@
+export const defaultEngineData = { status: 'stop', time: 0 };
+
 export const makes = [
   'Ferrari',
   'Lamborghini',
