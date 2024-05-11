@@ -105,7 +105,6 @@ export const deleteCarData = async (id: number): Promise<CarData | null> => {
 };
 
 // handles all car status change requests ('started' | 'stopped' | 'drive')
-// WORKING except patch error handling
 export const engineControl = async (
   id: number,
   status: string
