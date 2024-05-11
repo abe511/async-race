@@ -4,15 +4,20 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
   background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --root-padding: 1rem;
+  --car-width: 5rem;
+  --car-controls-w: 10rem;
+  --btn-border-w: 1px;
+  --line-border-w: 1px;
+  --track-offset: calc(100vw - var(--car-controls-w) - var(--car-width) - (var(--root-padding) * 2) - (var(--btn-border-w) * 4) - (var(--line-border-w) * 4))
 }
-
 
 /* resets */
 

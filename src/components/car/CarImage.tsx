@@ -6,11 +6,11 @@ interface CarImageProps {
 }
 
 const CarSvg = styled.svg<{ stroke: string }>`
-  height: 5rem;
+  height: 3rem;
   left: 0%;
   fill: lemonchiffon;
   fill-opacity: 0.3;
-  border: 1px solid violet;
+  border: 1px solid pink;
   stroke: ${(props) => props.stroke};
   stroke-width: 5;
   // filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));

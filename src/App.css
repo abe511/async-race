@@ -1,5 +1,5 @@
 #root {
-  padding: 1rem;
+  padding: var(--root-padding);
   border: 2px solid red;
   display: flex;
   flex-direction: column;
@@ -60,23 +60,11 @@ main {
   flex-direction: column;
 }
 
-main section {
-  border: 2px solid violet;
-  text-align: center;
-  
-}
-
 main section h3{
   font-size: 1.5rem;
   color: aquamarine;
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
 }
-
-main section span {
-  color: hotpink;
-  text-shadow: 0 0 10px rgba(255, 43, 191, 0.9);
-}
-
 
 main button {
   border: 2px solid chocolate;
@@ -95,12 +83,9 @@ main button:disabled {
   color: grey;
 }
 
-.dashboard {
-  border: 2px solid deepskyblue;
-  /* background: linear-gradient(-45deg, deeppink, deepskyblue); */
-}
 
-.dashboard button {
+
+/* .dashboard button {
   border: 1px solid royalblue;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -110,7 +95,7 @@ main button:disabled {
   box-shadow: 0 0 10px rgba(115, 0, 255, 0.7);
   text-shadow: 0 0 5px rgba(0, 162, 255, 0.9);
 
-}
+} */
 
 .controls {
   display: flex;

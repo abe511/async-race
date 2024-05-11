@@ -1,66 +1,69 @@
-import Grid from './Grid';
+import { useContext } from 'react';
+import styled from 'styled-components';
+import GarageContext from './context/GarageContext';
+import Car from './car/Car';
 
-const LANE_COUNT = 7;
+const TrackStyled = styled.section`
+  display: grid;
+  grid-template-columns: var(--car-controls-w) var(--car-width) 1rem 1fr 1rem var(--car-width);
+  grid-auto-rows: minmax(3rem, auto);
+  grid-row-gap: 10px;
+  width: 100%;
+  min-height: 3rem;
+  height: max-content;
+  border: 2px solid yellow;
+  user-select: none;
+  position: relative;
+`;
 
-const trackStyle: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  height: 'max-content',
-  border: '2px solid green',
-  writingMode: 'vertical-lr',
-  textOrientation: 'mixed',
-  userSelect: 'none',
-};
+const StartStyled = styled.div`
+  grid-column: 3 / 4;
+  grid-row: 1;
+  border: var(--line-border-w) solid red;
+  writing-mode: vertical-lr;
+  height: 100%;
+  width: 1rem;
+  line-height: 0.8rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
 
-const startStyle: React.CSSProperties = {
-  border: '1px solid red',
-  // flexGrow: '1',
-  width: '5rem',
-};
-
-const finishStyle: React.CSSProperties = {
-  border: '1px solid yellow',
-  // flexGrow: '1',
-  width: '5rem',
-};
-
-const laneStyle: React.CSSProperties = {
-  border: '1px solid gray',
-  flexGrow: '10',
-  height: '5rem',
-};
-
-const laneContainerStyle: React.CSSProperties = {
-  display: 'flex',
-  width: '100%',
-  border: '1px solid violet',
-};
-
-const createLanes = (quantity: number) => {
-  const lanes = [];
-  for (let i = 0; i < quantity; i += 1) {
-    lanes.push(
-      <span key={i} style={laneStyle}>
-        track {i + 1}
-      </span>
-    );
-  }
-  return lanes;
-};
+const FinishStyled = styled.div`
+  grid-column: 5 / 6;
+  grid-row: 1;
+  border: var(--line-border-w) solid blue;
+  writing-mode: vertical-lr;
+  height: 100%;
+  width: 1rem;
+  line-height: 0.8rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
 
 const Track = () => {
+  const { cars } = useContext(GarageContext);
+
   return (
-    <>
-      <div style={trackStyle}>
-        <span style={startStyle} />
-        <span>START</span>
-        <span style={laneContainerStyle}>{createLanes(LANE_COUNT)}</span>
-        <span>FINISH</span>
-        <span style={finishStyle} />
-      </div>
-      <Grid />
-    </>
+    <TrackStyled>
+      <StartStyled>START</StartStyled>
+      {cars.map((car: CarData) => {
+        return (
+          <Car
+            key={car.id}
+            id={car.id}
+            name={car.name}
+            color={car.color}
+            status={car.status}
+            time={car.time}
+          />
+        );
+      })}
+      <FinishStyled>FINISH</FinishStyled>
+    </TrackStyled>
   );
 };
 
