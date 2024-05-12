@@ -31,7 +31,7 @@ type CarStatus = {
 };
 
 type WinnerModal = {
-  open: boolean;
+  isOpen: boolean;
   id: number;
   name: string;
   time: number;

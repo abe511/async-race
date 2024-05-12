@@ -37,7 +37,12 @@ export const showWinner = async (
       return car;
     })
   );
-  setWinnerModalData({ open: true, id: winner[0].id, name: winner[0].name, time: fastestCar.time });
+  setWinnerModalData({
+    isOpen: true,
+    id: winner[0].id,
+    name: winner[0].name,
+    time: fastestCar.time,
+  });
 };
 
 export const raceRequests = (cars: CarData[], setCars: SetCars, raceStartTime: number) => {

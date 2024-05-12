@@ -33,13 +33,13 @@ const Text = styled.p`
 `;
 
 const handleClose = (setWinnerModalData: SetState) => {
-  setWinnerModalData((prev: WinnerModal) => ({ ...prev, open: false }));
+  setWinnerModalData((prev: WinnerModal) => ({ ...prev, isOpen: false }));
 };
 
 const WinnerModal = () => {
   const { winnerModalData, setWinnerModalData } = useContext(GarageContext);
 
-  if (!winnerModalData.open) return null;
+  if (!winnerModalData.isOpen) return null;
 
   return (
     <ModalOverlay onClick={() => handleClose(setWinnerModalData)}>

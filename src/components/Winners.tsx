@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import Pagination from './Pagination';
 import Title from './Title';
+import GarageContext from './context/GarageContext';
+import CarImage from './car/CarImage';
 
 const Winners = () => {
+  const { cars } = useContext(GarageContext);
   return (
     <>
       <Title title="WINNERS" />
@@ -16,13 +20,19 @@ const Winners = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>image</td>
-            <td>car</td>
-            <td>number</td>
-            <td>time</td>
-          </tr>
+          {cars.map((car) => {
+            return (
+              <tr key={car.id}>
+                <td>{car.id}</td>
+                <td>
+                  <CarImage stroke={car.color} />
+                </td>
+                <td>{car.name}</td>
+                <td>{car.wins}</td>
+                <td>{car.bestTime}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Pagination />
