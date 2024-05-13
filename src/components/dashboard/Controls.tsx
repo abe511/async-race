@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import MainContext from 'components/context/MainContext';
 import GarageContext from 'components/context/GarageContext';
 import { handleRace, handleReset } from 'utils/raceUtils';
 
 const Controls = () => {
-  const { cars, setCars, setError, setWinnerModalData } = useContext(GarageContext);
+  const { cars, setCars, setError } = useContext(GarageContext);
+  const { setWinnerModalData } = useContext(MainContext);
 
   return (
     <article className="controls">

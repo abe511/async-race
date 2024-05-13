@@ -1,3 +1,5 @@
+import { garagePageLimit } from 'utils/data';
+
 const BASE_URL = 'http://127.0.0.1:3000';
 
 export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> => {
@@ -24,11 +26,17 @@ export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> =>
   }
 };
 
-export const getCars = async (): Promise<CarData[] | []> => {
+export const getCars = async (page: number, setTotalItems: SetState): Promise<CarData[] | []> => {
+  const params = { _page: page.toString(), _limit: garagePageLimit.toString() };
+  const query = new URLSearchParams(params).toString();
   try {
-    const response = await fetch(`${BASE_URL}/garage`);
+    const response = await fetch(`${BASE_URL}/garage/?${query}`);
     if (!response.ok) {
       throw new Error('Failed to get car data');
+    }
+    if (response.headers.get('x-total-count')) {
+      const totalCars = parseInt(response.headers.get('x-total-count') as string, 10);
+      setTotalItems((prev: TotalItems) => ({ ...prev, cars: totalCars }));
     }
     const data = await response.json();
     return data;
@@ -37,7 +45,7 @@ export const getCars = async (): Promise<CarData[] | []> => {
   }
 };
 
-export const getCarData = async (id: number): Promise<CarData | null> => {
+export const getCar = async (id: number): Promise<CarData | null> => {
   try {
     const response = await fetch(`${BASE_URL}/garage/${id}`);
     if (!response.ok) {

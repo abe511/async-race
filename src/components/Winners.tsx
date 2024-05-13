@@ -1,14 +1,18 @@
 import { useContext } from 'react';
-import Pagination from './Pagination';
-import Title from './Title';
+import { winnersPageLimit } from 'utils/data';
+import MainContext from './context/MainContext';
 import GarageContext from './context/GarageContext';
+import Title from './Title';
 import CarImage from './car/CarImage';
+import Pagination from './Pagination';
 
 const Winners = () => {
   const { cars } = useContext(GarageContext);
+  const { totalItems } = useContext(MainContext);
+
   return (
     <>
-      <Title title="WINNERS" />
+      <Title title="WINNERS" total={totalItems.winners} />
       <table>
         <thead>
           <tr>
@@ -35,7 +39,7 @@ const Winners = () => {
           })}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination view="winners" limit={winnersPageLimit} total={totalItems.winners} />
     </>
   );
 };

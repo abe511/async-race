@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import GarageContext from './context/GarageContext';
+import MainContext from './context/MainContext';
 
 const ModalOverlay = styled.div`
   display: flex;
@@ -11,15 +11,17 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(10, 10, 10, 0.5);
+  background-color: rgba(10, 10, 10, 0.7);
+  z-index: 2000;
 `;
 
 const Winner = styled.article`
-  background-color: rgba(50, 50, 50, 0.8);
+  background-color: rgba(50, 50, 50, 0.9);
   width: 30%;
   border: 1px solid violet;
   padding: 1rem;
   border-radius: 0.5rem;
+  z-index: 2100;
 `;
 
 const Title = styled.p`
@@ -37,7 +39,7 @@ const handleClose = (setWinnerModalData: SetState) => {
 };
 
 const WinnerModal = () => {
-  const { winnerModalData, setWinnerModalData } = useContext(GarageContext);
+  const { winnerModalData, setWinnerModalData } = useContext(MainContext);
 
   if (!winnerModalData.isOpen) return null;
 

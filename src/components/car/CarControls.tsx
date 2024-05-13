@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { handleStart, handleStop } from 'utils/carUtils';
-import GarageContext from '../context/GarageContext';
+import MainContext from 'components/context/MainContext';
+import GarageContext from 'components/context/GarageContext';
 
 const CarControlsContainer = styled.aside`
   display: grid;
@@ -21,14 +22,15 @@ type CarControlsProps = {
 };
 
 const CarControls = ({ id, engineStatus, setEngineStatus, setDuration }: CarControlsProps) => {
-  const { removeCar, setCars, setError, setSelected } = useContext(GarageContext);
+  const { cars, removeCar, setCars, setError, setSelected } = useContext(GarageContext);
+  const { setTotalItems } = useContext(MainContext);
 
   return (
     <CarControlsContainer>
       <button type="button" onClick={() => setSelected(id)}>
         SELECT
       </button>
-      <button type="button" onClick={() => removeCar(id, setCars, setError)}>
+      <button type="button" onClick={() => removeCar(id, cars, setCars, setError, setTotalItems)}>
         REMOVE
       </button>
       <button

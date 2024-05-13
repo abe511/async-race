@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-type ContextProps = {
+type GarageContextProps = {
   id: number;
   cars: CarData[];
   setCars: SetCars;
@@ -11,11 +11,9 @@ type ContextProps = {
   addCar: AddCar;
   updateCar: UpdateCar;
   removeCar: RemoveCar;
-  winnerModalData: WinnerModal;
-  setWinnerModalData: SetState;
 };
 
-const GarageContext = createContext<ContextProps>({
+const GarageContext = createContext<GarageContextProps>({
   id: -1,
   cars: [],
   setCars: () => {},
@@ -26,13 +24,6 @@ const GarageContext = createContext<ContextProps>({
   addCar: () => {},
   updateCar: () => {},
   removeCar: () => {},
-  winnerModalData: {
-    open: false,
-    id: -1,
-    name: '',
-    time: Infinity,
-  },
-  setWinnerModalData: () => {},
 });
 
 export default GarageContext;

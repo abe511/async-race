@@ -6,12 +6,6 @@ const GarageContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cars, setCars] = useState<CarData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<number>(0);
-  const [winnerModalData, setWinnerModalData] = useState<WinnerModal>({
-    open: false,
-    id: -1,
-    name: '',
-    time: Infinity,
-  });
 
   return (
     <GarageContext.Provider
@@ -27,10 +21,8 @@ const GarageContextProvider = ({ children }: { children: React.ReactNode }) => {
           fetchCars,
           updateCar,
           removeCar,
-          winnerModalData,
-          setWinnerModalData,
         };
-      }, [cars, error, selected, winnerModalData])}
+      }, [cars, error, selected])}
     >
       {children}
     </GarageContext.Provider>

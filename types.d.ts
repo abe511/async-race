@@ -8,39 +8,34 @@ type CarData = {
   wins: number;
 };
 
-type CarUpdateData = {
-  id: number;
-  name: string;
-  color: string;
-};
+type NewCarData = { name: string; color: string };
 
-type EngineData = {
-  velocity: number;
-  distance: number;
-};
+type CarUpdateData = { id: number; name: string; color: string };
 
-type EngineStatus = {
-  success: boolean;
-};
+type CarStatus = { status: string; time?: number; bestTime?: number; wins?: number };
 
-type CarStatus = {
-  status: string;
-  time?: number;
-  bestTime?: number;
-  wins?: number;
-};
+type EngineData = { velocity: number; distance: number };
 
-type WinnerModal = {
-  isOpen: boolean;
-  id: number;
-  name: string;
-  time: number;
-};
+type EngineStatus = { success: boolean };
 
 type RaceResults = { id: number; time: number };
 
-type FetchCars = (setCars: SetCars, setError: SetError) => void;
-// type FetchCars = (setCars: SetCars, setError: SetError, status, time) => void;
+type WinnerModal = { isOpen: boolean; id: number; name: string; time: number };
+
+type WinnerData = { id: number; name: string; color: string; bestTime: number; wins: number };
+
+type CurrentPage = { garage: number; winners: number };
+
+type TotalItems = { cars: number; winners: number };
+
+type PaginationProps = { view: string; limit: number; total: number };
+
+type FetchCars = (
+  page: number,
+  setCars: SetCars,
+  setError: SetError,
+  setTotalItems: SetState
+) => void;
 
 type SetState = Dispatch<S | SetStateAction<S>>;
 
@@ -50,34 +45,60 @@ type SetError = Dispatch<string | null | SetStateAction<string | null>>;
 
 type SetSelected = (id: number) => void;
 
-type NewCarData = { name: string; color: string };
+type GenerateCars = (
+  quantity: number,
+  setCars: SetCars,
+  setError: SetError,
+  page: number,
+  setTotalItems: SetState
+) => void;
 
-type AddCar = (payload: NewCarData, setCars: SetCars, setError: SetError) => void;
+type AddCar = (
+  payload: NewCarData,
+  setCars: SetCars,
+  setError: SetError,
+  page: number,
+  setTotalItems: SetState
+) => void;
 
-// type UpdateCar = (car: CarData, setCars: SetCars, setError: SetError) => void;
 type UpdateCar = (car: CarUpdateData, setCars: SetCars, setError: SetError) => void;
 
-type RemoveCar = (id: number, setCars: SetCars, setError: SetError) => void;
+type RemoveCar = (
+  id: number,
+  cars: CarData[],
+  setCars: SetCars,
+  setError: SetError,
+  setTotalItems: SetState
+) => void;
 
 type InputSetter = (value: string) => void;
 
 type HandleCreate = (
   name: string,
   color: string,
-  addCar: AddCar,
   setCars: SetCars,
   setError: SetError,
-  setNewName: React.Dispatch<string>,
-  setNewColor: React.Dispatch<string>
+  setNewName: SetState,
+  setNewColor: SetState,
+  page: number,
+  setTotalItems: SetState
 ) => void;
 
 type HandleUpdate = (
   id: number,
   name: string,
   color: string,
-  updateCar: UpdateCar,
   setCars: SetCars,
   setError: SetError,
   setUpdName: SetState,
   setUpdColor: SetState
+) => void;
+
+type HandlePageSwitch = (
+  page: number,
+  view: string,
+  setCurrentPage: SetState,
+  setCars: SetCars,
+  setError: SetError,
+  setTotalItems: SetState
 ) => void;

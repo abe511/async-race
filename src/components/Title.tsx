@@ -14,14 +14,16 @@ const Subtitle = styled.p`
 
 type TitleProps = {
   title: string;
+  total: number;
 };
 
-const Title = ({ title }: TitleProps) => {
+const Title = ({ title, total }: TitleProps) => {
   const { error } = useContext(GarageContext);
 
   return (
     <TitleStyled>
       <h3>{title}</h3>
+      <span>{total}</span>
       <Subtitle>{error}</Subtitle>
     </TitleStyled>
   );

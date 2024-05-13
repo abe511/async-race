@@ -1,11 +1,13 @@
 import { useState, useContext } from 'react';
+import MainContext from 'components/context/MainContext';
 import GarageContext from '../context/GarageContext';
 import { handleInputChange, handleCreate } from '../../utils/garageUtils';
 
 const Create = () => {
   const [newName, setNewName] = useState('');
   const [newColor, setNewColor] = useState('');
-  const { setCars, setError, addCar } = useContext(GarageContext);
+  const { setCars, setError } = useContext(GarageContext);
+  const { currentPage, setTotalItems } = useContext(MainContext);
 
   return (
     <article className="create">
@@ -19,7 +21,16 @@ const Create = () => {
       <button
         type="button"
         onClick={() =>
-          handleCreate(newName, newColor, addCar, setCars, setError, setNewName, setNewColor)
+          handleCreate(
+            newName,
+            newColor,
+            setCars,
+            setError,
+            setNewName,
+            setNewColor,
+            currentPage.garage,
+            setTotalItems
+          )
         }
       >
         CREATE

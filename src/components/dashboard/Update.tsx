@@ -5,7 +5,7 @@ import { handleInputChange, handleUpdate } from '../../utils/garageUtils';
 const Update = () => {
   const [updName, setUpdName] = useState('');
   const [updColor, setUpdColor] = useState('');
-  const { id, setCars, setError, updateCar } = useContext(GarageContext);
+  const { id, setCars, setError } = useContext(GarageContext);
   return (
     <article className="update">
       <input
@@ -18,7 +18,7 @@ const Update = () => {
       <button
         type="button"
         onClick={() =>
-          handleUpdate(id, updName, updColor, updateCar, setCars, setError, setUpdName, setUpdColor)
+          handleUpdate(id, updName, updColor, setCars, setError, setUpdName, setUpdColor)
         }
       >
         UPDATE
