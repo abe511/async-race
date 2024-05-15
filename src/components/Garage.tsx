@@ -13,12 +13,13 @@ import WinnersContext from './context/WinnersContext';
 const Garage = () => {
   const { fetchCars, setCars, setError } = useContext(GarageContext);
   const { currentPage, totalItems, setTotalItems } = useContext(MainContext);
-  const { winners, setWinners } = useContext(WinnersContext);
+  const { winners, setWinners, sort } = useContext(WinnersContext);
+  const { column, order } = sort;
 
   useEffect(() => {
     fetchCars(currentPage.garage, setCars, setError, setTotalItems);
     if (winners.length === 0) {
-      fetchWinners(currentPage.winners, setWinners, setError, setTotalItems);
+      fetchWinners(currentPage.winners, setWinners, setError, setTotalItems, column, order);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);

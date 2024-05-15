@@ -4,6 +4,7 @@ import WinnersContext from './WinnersContext';
 
 const WinnersContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [winners, setWinners] = useLocalStorage('winners', []);
+  const [sort, setSort] = useLocalStorage('sort', { column: 'wins', order: 'DESC' });
 
   return (
     <WinnersContext.Provider
@@ -11,8 +12,10 @@ const WinnersContextProvider = ({ children }: { children: React.ReactNode }) => 
         return {
           winners,
           setWinners,
+          sort,
+          setSort,
         };
-      }, [winners, setWinners])}
+      }, [winners, setWinners, sort, setSort])}
     >
       {children}
     </WinnersContext.Provider>

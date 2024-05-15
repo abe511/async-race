@@ -109,9 +109,14 @@ type FetchWinners = (
   setWinners: SetState,
   setError: SetError,
   setTotalItems: SetState,
-  sort?: string,
-  order?: string
+  sort: string,
+  order: string
 ) => Promise<void>;
+
+type SortOrder = {
+  column: string;
+  order: string;
+};
 
 type CarsMap = {
   [id: number]: {

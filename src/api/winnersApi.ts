@@ -6,11 +6,13 @@ const BASE_URL = 'http://127.0.0.1:3000';
 // _limit=[integer]
 // _sort=['id'|'wins'|'time']
 // _order=['ASC'|'DESC']
+// sort = 'wins',
+// order = 'DESC'
 export const getWinners = async (
   page: number,
   setTotalItems: SetState,
-  sort = 'wins',
-  order = 'DESC'
+  sort: string,
+  order: string
 ): Promise<WinnerPayload[] | []> => {
   const params = {
     _page: page.toString(),
