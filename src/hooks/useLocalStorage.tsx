@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 const getLocalValue = (key: string, initialState: unknown) => {
   if (key) {
-    // const value = JSON.parse(localStorage.getItem(key));
     const value: string | null = localStorage.getItem(key);
     if (value) {
       return JSON.parse(value);

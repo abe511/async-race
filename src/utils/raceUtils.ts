@@ -1,10 +1,14 @@
 import { engineControl } from 'api/garageApi';
+import { updateWinnersList } from './winnersUtils';
 
 export const setCarStatus = (id: number, setCars: SetCars, carData: CarStatus) => {
   setCars((prev: CarData[]) => prev.map((car) => (car.id === id ? { ...car, ...carData } : car)));
 };
 
-export const showWinner = async (
+// determine the fastest car in a race that has crossed the finish line
+// show a winner modal with the winner's data
+// return winner data
+export const announceWinner = async (
   cars: CarData[],
   results: PromiseSettledResult<RaceResults>[],
   setCars: SetCars,
@@ -20,29 +24,16 @@ export const showWinner = async (
 
   const winner = cars.filter((car: CarData) => car.id === fastestCar.id);
   if (!winner.length) {
-    setWinnerModalData({ open: true, id: -1, name: '', time: Infinity });
-
-    return;
+    setWinnerModalData({ isOpen: true, id: -1, name: '', time: Infinity });
+    return null;
   }
-  setCars((prev: CarData[]) =>
-    prev.map((car) => {
-      if (car.id === winner[0].id) {
-        let newBestTime = fastestCar.time;
-        if (car.bestTime && car.bestTime < fastestCar.time) {
-          newBestTime = car.bestTime;
-        }
-        const update = { wins: car.wins ? car.wins + 1 : 1, bestTime: newBestTime };
-        return { ...car, ...update };
-      }
-      return car;
-    })
-  );
   setWinnerModalData({
     isOpen: true,
     id: winner[0].id,
     name: winner[0].name,
     time: fastestCar.time,
   });
+  return { id: winner[0].id, time: fastestCar.time, name: winner[0].name, color: winner[0].color };
 };
 
 export const raceRequests = (cars: CarData[], setCars: SetCars, raceStartTime: number) => {
@@ -86,7 +77,9 @@ export const handleRace = async (
   cars: CarData[],
   setCars: SetCars,
   setError: SetError,
-  setWinnerModalData: SetState
+  setWinnerModalData: SetState,
+  winners: WinnerData[],
+  setWinners: SetState
 ) => {
   setError('');
   const raceStartTime = Date.now(); // 'RACE' button click
@@ -95,7 +88,9 @@ export const handleRace = async (
     const requests = raceRequests(cars, setCars, raceStartTime);
     const raceResponses: PromiseSettledResult<RaceResults>[] = await Promise.allSettled(requests);
     // SHOW THE WINNER
-    showWinner(cars, raceResponses, setCars, setWinnerModalData);
+    const newWinner = await announceWinner(cars, raceResponses, setCars, setWinnerModalData);
+    if (!newWinner) throw new Error('No winner');
+    updateWinnersList(winners, newWinner, setWinners, setError);
   } catch (error) {
     if (error instanceof Error) {
       setError(error.message);

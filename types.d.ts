@@ -4,8 +4,6 @@ type CarData = {
   color: string;
   time: number;
   status: string;
-  bestTime: number;
-  wins: number;
 };
 
 type NewCarData = { name: string; color: string };
@@ -22,7 +20,9 @@ type RaceResults = { id: number; time: number };
 
 type WinnerModal = { isOpen: boolean; id: number; name: string; time: number };
 
-type WinnerData = { id: number; name: string; color: string; bestTime: number; wins: number };
+type WinnerData = { id: number; time: number; wins: number; name: string; color: string };
+
+type WinnerPayload = { id: number; time: number; wins: number };
 
 type CurrentPage = { garage: number; winners: number };
 
@@ -66,6 +66,7 @@ type UpdateCar = (car: CarUpdateData, setCars: SetCars, setError: SetError) => v
 type RemoveCar = (
   id: number,
   cars: CarData[],
+  winners: WinnerData[],
   setCars: SetCars,
   setError: SetError,
   setTotalItems: SetState
@@ -101,4 +102,38 @@ type HandlePageSwitch = (
   setCars: SetCars,
   setError: SetError,
   setTotalItems: SetState
+) => void;
+
+type FetchWinners = (
+  page: number,
+  setWinners: SetState,
+  setError: SetError,
+  setTotalItems: SetState,
+  sort?: string,
+  order?: string
+) => Promise<void>;
+
+type CarsMap = {
+  [id: number]: {
+    id: number;
+    name: string;
+    color: string;
+  };
+};
+
+type AddWinner = (payload: WinnerData, setWinners: SetState, setError: SetError) => Promise<void>;
+
+type UpdateWinner = (
+  updatedWinner: WinnerData,
+  setWinners: SetState,
+  setError: SetError
+) => Promise<void>;
+
+type RemoveWinner = (id: number, setError: SetError) => Promise<void>;
+
+type UpdateWinnersList = (
+  winners: WinnerData[],
+  newWinner: NewWinnerData,
+  setWinners: SetState,
+  setError: SetError
 ) => void;

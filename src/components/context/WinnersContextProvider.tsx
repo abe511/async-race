@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
+import useLocalStorage from 'hooks/useLocalStorage';
 import WinnersContext from './WinnersContext';
 
 const WinnersContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [winners, setWinners] = useState<WinnerData[]>([]);
+  const [winners, setWinners] = useLocalStorage('winners', []);
 
   return (
     <WinnersContext.Provider
@@ -11,7 +12,7 @@ const WinnersContextProvider = ({ children }: { children: React.ReactNode }) => 
           winners,
           setWinners,
         };
-      }, [winners])}
+      }, [winners, setWinners])}
     >
       {children}
     </WinnersContext.Provider>

@@ -1,18 +1,14 @@
 import { getCars, getCar, createCar, addCars, updateCarData, deleteCarData } from 'api/garageApi';
-import { makes, models, colors, defaultEngineData } from './data';
+import { removeWinner } from './winnersUtils';
+import { makes, models, colors } from './data';
 
-// get car data from the server
-// add 'status' and 'time' properties to each car stored locally
 export const fetchCars: FetchCars = async (page, setCars, setError, setTotalItems) => {
   try {
     const data = await getCars(page, setTotalItems);
-    const localData = data.map((car) => {
-      return { ...car, ...defaultEngineData };
-    });
-    setCars(localData);
     if (!data.length) {
       throw new Error('No car data');
     }
+    setCars(data);
   } catch (error) {
     if (error instanceof Error) {
       setError(error.message);
@@ -20,6 +16,7 @@ export const fetchCars: FetchCars = async (page, setCars, setError, setTotalItem
   }
 };
 
+// car name and color generator
 const generator = (quantity: number): NewCarData[] => {
   const cars: NewCarData[] = [];
   for (let i = 0; i < quantity; i += 1) {
@@ -39,11 +36,16 @@ export const generateCars: GenerateCars = async (
   setTotalItems
 ) => {
   const cars = generator(quantity);
-  const result = await addCars(cars);
-  if (!result.length) {
-    setError('Failed to add cars');
-  } else {
+  try {
+    const result = await addCars(cars);
+    if (!result.length) {
+      throw new Error('Failed to add cars');
+    }
     fetchCars(page, setCars, setError, setTotalItems);
+  } catch (error) {
+    if (error instanceof Error) {
+      setError(error.message);
+    }
   }
 };
 
@@ -61,7 +63,6 @@ export const addCar: AddCar = async (payload, setCars, setError, page, setTotalI
   }
 };
 
-// modify 'name' and 'color' properties only
 export const updateCar: UpdateCar = async (updatedCar, setCars, setError) => {
   try {
     const data = await updateCarData(updatedCar);
@@ -78,18 +79,29 @@ export const updateCar: UpdateCar = async (updatedCar, setCars, setError) => {
   }
 };
 
-export const removeCar: RemoveCar = async (id, cars, setCars, setError, setTotalItems) => {
+// remove the car from the server
+// remove the winner from the server if found locally
+// remove the car locally
+// get a car (next to local last car) from the server
+// add to local cars if exists
+// decrement cars and winners total on the server
+export const removeCar: RemoveCar = async (id, cars, winners, setCars, setError, setTotalItems) => {
   try {
     const data = await deleteCarData(id);
     if (!data) {
       throw new Error('Failed to remove the car');
     }
+    const isWinnerExists = winners.filter((winner: WinnerData) => winner.id === id);
+    if (isWinnerExists.length) await removeWinner(id, setError);
     setCars((prev: CarData[]) => prev.filter((car) => car.id !== id));
     const nextCarId = cars[cars.length - 1].id + 1;
     const nextCar = await getCar(nextCarId);
     if (nextCar) {
       setCars((prev: CarData[]) => [...prev, nextCar]);
-      setTotalItems((prev: TotalItems) => ({ ...prev, cars: prev.cars - 1 }));
+      setTotalItems((prev: TotalItems) => ({
+        cars: prev.cars - 1,
+        winners: isWinnerExists.length ? prev.winners - 1 : prev.winners,
+      }));
     }
   } catch (error) {
     if (error instanceof Error) {

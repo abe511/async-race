@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { addCar, fetchCars, updateCar, removeCar } from '../../utils/garageUtils';
 import GarageContext from './GarageContext';
 
 const GarageContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cars, setCars] = useState<CarData[]>([]);
+  const [cars, setCars] = useLocalStorage('cars', []);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<number>(0);
 
@@ -22,7 +23,7 @@ const GarageContextProvider = ({ children }: { children: React.ReactNode }) => {
           updateCar,
           removeCar,
         };
-      }, [cars, error, selected])}
+      }, [cars, error, selected, setCars])}
     >
       {children}
     </GarageContext.Provider>

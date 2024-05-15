@@ -1,8 +1,6 @@
-export const defaultEngineData = { status: 'stop', time: 0 };
-
 export const garagePageLimit = 7;
 
-export const winnersPageLimit = 7;
+export const winnersPageLimit = 10;
 
 export const makes = [
   'Ferrari',

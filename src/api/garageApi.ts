@@ -26,6 +26,19 @@ export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> =>
   }
 };
 
+export const getAllCars = async (): Promise<CarData[] | []> => {
+  try {
+    const response = await fetch(`${BASE_URL}/garage`);
+    if (!response.ok) {
+      throw new Error('Failed to get car data');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return [];
+  }
+};
+
 export const getCars = async (page: number, setTotalItems: SetState): Promise<CarData[] | []> => {
   const params = { _page: page.toString(), _limit: garagePageLimit.toString() };
   const query = new URLSearchParams(params).toString();
@@ -77,7 +90,6 @@ export const createCar = async (payload: NewCarData): Promise<CarData | null> =>
   }
 };
 
-// export const updateCarData = async ({ id, ...payload }: CarData): Promise<CarData | null> => {
 export const updateCarData = async ({ id, ...payload }: CarUpdateData): Promise<CarData | null> => {
   try {
     const response = await fetch(`${BASE_URL}/garage/${id}`, {

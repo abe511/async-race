@@ -1,43 +1,51 @@
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { winnersPageLimit } from 'utils/data';
+import { fetchWinners } from 'utils/winnersUtils';
 import MainContext from './context/MainContext';
 import GarageContext from './context/GarageContext';
+import WinnersContext from './context/WinnersContext';
 import Title from './Title';
 import CarImage from './car/CarImage';
 import Pagination from './Pagination';
 
+const tableHeaders = () => {
+  const headers = ['NO', 'CAR', 'NAME', 'WINS', 'BEST TIME (SECONDS)'];
+  return headers.map((header) => <th key={header}>{header}</th>);
+};
+
+const tableRows = (winners: WinnerData[]) => {
+  return winners.map((winner) => {
+    return (
+      <tr key={winner.id}>
+        <td>{winner.id}</td>
+        <td>
+          <CarImage stroke={winner.color} />
+        </td>
+        <td>{winner.name}</td>
+        <td>{winner.wins}</td>
+        <td>{winner.time}</td>
+      </tr>
+    );
+  });
+};
+
 const Winners = () => {
-  const { cars } = useContext(GarageContext);
-  const { totalItems } = useContext(MainContext);
+  const { setError } = useContext(GarageContext);
+  const { currentPage, totalItems, setTotalItems } = useContext(MainContext);
+  const { winners, setWinners } = useContext(WinnersContext);
+  useEffect(() => {
+    fetchWinners(currentPage.winners, setWinners, setError, setTotalItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage.winners]);
 
   return (
     <>
       <Title title="WINNERS" total={totalItems.winners} />
       <table>
         <thead>
-          <tr>
-            <th>NO</th>
-            <th>CAR</th>
-            <th>NAME</th>
-            <th>WINS</th>
-            <th>BEST TIME (SECONDS)</th>
-          </tr>
+          <tr>{tableHeaders()}</tr>
         </thead>
-        <tbody>
-          {cars.map((car) => {
-            return (
-              <tr key={car.id}>
-                <td>{car.id}</td>
-                <td>
-                  <CarImage stroke={car.color} />
-                </td>
-                <td>{car.name}</td>
-                <td>{car.wins}</td>
-                <td>{car.bestTime}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+        <tbody>{tableRows(winners)}</tbody>
       </table>
       <Pagination view="winners" limit={winnersPageLimit} total={totalItems.winners} />
     </>
