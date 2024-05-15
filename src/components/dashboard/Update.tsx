@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import GarageContext from 'components/context/GarageContext';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { handleInputChange, handleUpdate } from '../../utils/garageUtils';
 
 const Update = () => {
-  const [updName, setUpdName] = useState('');
-  const [updColor, setUpdColor] = useState('');
+  const [updName, setUpdName] = useLocalStorage('RACE_updateName', '');
+  const [updColor, setUpdColor] = useLocalStorage('RACE_updateColor', '');
   const { id, setCars, setError } = useContext(GarageContext);
   return (
     <article className="update">
