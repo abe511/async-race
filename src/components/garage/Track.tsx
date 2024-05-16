@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import GarageContext from './context/GarageContext';
+import GarageContext from '../context/GarageContext';
 import Car from './car/Car';
 
 const TrackStyled = styled.section`

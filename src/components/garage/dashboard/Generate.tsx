@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import GarageContext from 'components/context/GarageContext';
 import { generateCars } from 'utils/garageUtils';
 import MainContext from 'components/context/MainContext';
+import { GenerateContainer, GenerateButton } from 'components/garage/dashboard/Dashboard.styled';
 
 type GenerateProps = {
   quantity: number;
@@ -12,14 +13,13 @@ const Generate = ({ quantity }: GenerateProps) => {
   const { currentPage, setTotalItems } = useContext(MainContext);
 
   return (
-    <article className="generate">
-      <button
-        type="button"
+    <GenerateContainer className="generate">
+      <GenerateButton
         onClick={() => generateCars(quantity, setCars, setError, currentPage.garage, setTotalItems)}
       >
         GENERATE CARS
-      </button>
-    </article>
+      </GenerateButton>
+    </GenerateContainer>
   );
 };
 

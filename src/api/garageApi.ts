@@ -1,6 +1,4 @@
-import { garagePageLimit } from 'utils/data';
-
-const BASE_URL = 'http://127.0.0.1:3000';
+import { BASE_URL, garagePageLimit } from 'constants/appData';
 
 export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> => {
   try {

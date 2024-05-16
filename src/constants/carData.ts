@@ -1,7 +1,3 @@
-export const garagePageLimit = 7;
-
-export const winnersPageLimit = 10;
-
 export const makes = [
   'Ferrari',
   'Lamborghini',

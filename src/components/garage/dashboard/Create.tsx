@@ -1,8 +1,14 @@
 import { useContext } from 'react';
 import MainContext from 'components/context/MainContext';
 import useLocalStorage from 'hooks/useLocalStorage';
-import GarageContext from '../context/GarageContext';
-import { handleInputChange, handleCreate } from '../../utils/garageUtils';
+import {
+  InputsContainer,
+  InputText,
+  InputColor,
+  InputButton,
+} from 'components/garage/dashboard/Dashboard.styled';
+import GarageContext from '../../context/GarageContext';
+import { handleInputChange, handleCreate } from '../../../utils/garageUtils';
 
 const Create = () => {
   const [newName, setNewName] = useLocalStorage('RACE_newName', '');
@@ -11,16 +17,19 @@ const Create = () => {
   const { currentPage, setTotalItems } = useContext(MainContext);
 
   return (
-    <article className="create">
-      <input
+    <InputsContainer className="create">
+      <InputText
         type="text"
         placeholder="Enter Make"
         value={newName}
         onChange={(e) => handleInputChange(e, setNewName)}
       />
-      <input type="color" value={newColor} onChange={(e) => handleInputChange(e, setNewColor)} />
-      <button
-        type="button"
+      <InputColor
+        type="color"
+        value={newColor}
+        onChange={(e) => handleInputChange(e, setNewColor)}
+      />
+      <InputButton
         onClick={() =>
           handleCreate(
             newName,
@@ -35,8 +44,8 @@ const Create = () => {
         }
       >
         CREATE
-      </button>
-    </article>
+      </InputButton>
+    </InputsContainer>
   );
 };
 

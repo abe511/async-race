@@ -1,6 +1,6 @@
 import { getCars, getCar, createCar, addCars, updateCarData, deleteCarData } from 'api/garageApi';
 import { removeWinner } from './winnersUtils';
-import { makes, models, colors } from './data';
+import { makes, models, colors } from '../constants/carData';
 
 export const fetchCars: FetchCars = async (page, setCars, setError, setTotalItems) => {
   try {

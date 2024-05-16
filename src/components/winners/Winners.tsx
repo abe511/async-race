@@ -1,12 +1,12 @@
 import { useEffect, useContext } from 'react';
-import { winnersPageLimit } from 'utils/data';
+import { winnersPageLimit } from 'constants/appData';
 import { fetchWinners } from 'utils/winnersUtils';
-import MainContext from './context/MainContext';
-import GarageContext from './context/GarageContext';
-import WinnersContext from './context/WinnersContext';
-import Title from './Title';
-import CarImage from './car/CarImage';
-import Pagination from './Pagination';
+import MainContext from '../context/MainContext';
+import GarageContext from '../context/GarageContext';
+import WinnersContext from '../context/WinnersContext';
+import ViewTitle from '../app/ViewTitle';
+import CarImage from '../garage/car/CarImage';
+import Pagination from '../app/Pagination';
 
 const handleSort = (column: string, setSort: SetState) => {
   setSort((prev: SortOrder) => ({
@@ -62,7 +62,7 @@ const Winners = () => {
 
   return (
     <>
-      <Title title="WINNERS" total={totalItems.winners} />
+      <ViewTitle title="WINNERS" total={totalItems.winners} />
       <table>
         <thead>
           <tr>{tableHeaders(setSort)}</tr>

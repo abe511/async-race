@@ -1,24 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import CarSvg from 'components/garage/car/CarImage.styled';
 
-interface CarImageProps {
+type CarImageProps = {
   stroke: string;
-}
+};
 
-const CarSvg = styled.svg<{ stroke: string }>`
-  height: 3rem;
-  left: 0%;
-  fill: lemonchiffon;
-  fill-opacity: 0.3;
-  border: 1px solid pink;
-  stroke: ${(props) => props.stroke};
-  stroke-width: 5;
-  // filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
-  filter: drop-shadow(0 0 5px ${(props) => props.stroke});
-`;
-// stroke: ${(props: { strokeColor: string }) => props.strokeColor || 'red'};
-
-const CarImage: React.FC<CarImageProps> = (props: CarImageProps) => (
+const CarImage = (props: CarImageProps) => (
   <CarSvg viewBox="0 0 512.55 314" {...props}>
     <path
       xmlns="http://www.w3.org/2000/svg"

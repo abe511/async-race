@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import MainContext from './context/MainContext';
+import MainContext from '../context/MainContext';
 
 const ModalOverlay = styled.div`
   display: flex;

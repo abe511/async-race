@@ -3,6 +3,7 @@ import MainContext from 'components/context/MainContext';
 import GarageContext from 'components/context/GarageContext';
 import WinnersContext from 'components/context/WinnersContext';
 import { handleRace, handleReset } from 'utils/raceUtils';
+import { ControlsContainer, ControlsButton } from 'components/garage/dashboard/Dashboard.styled';
 
 const Controls = () => {
   const { cars, setCars, setError } = useContext(GarageContext);
@@ -10,17 +11,14 @@ const Controls = () => {
   const { winners, setWinners } = useContext(WinnersContext);
 
   return (
-    <article className="controls">
-      <button
-        type="button"
+    <ControlsContainer>
+      <ControlsButton
         onClick={() => handleRace(cars, setCars, setError, setWinnerModalData, winners, setWinners)}
       >
         RACE
-      </button>
-      <button type="button" onClick={() => handleReset(cars, setCars, setError)}>
-        RESET
-      </button>
-    </article>
+      </ControlsButton>
+      <ControlsButton onClick={() => handleReset(cars, setCars, setError)}>RESET</ControlsButton>
+    </ControlsContainer>
   );
 };
 

@@ -1,14 +1,14 @@
 import { useEffect, useContext } from 'react';
-import { garagePageLimit } from 'utils/data';
+import { garagePageLimit } from 'constants/appData';
 import { fetchWinners } from 'utils/winnersUtils';
-import MainContext from './context/MainContext';
-import GarageContext from './context/GarageContext';
+import MainContext from '../context/MainContext';
+import GarageContext from '../context/GarageContext';
 import Dashboard from './dashboard/Dashboard';
-import Title from './Title';
+import ViewTitle from '../app/ViewTitle';
 import Track from './Track';
-import Pagination from './Pagination';
+import Pagination from '../app/Pagination';
 import WinnerModal from './WinnerModal';
-import WinnersContext from './context/WinnersContext';
+import WinnersContext from '../context/WinnersContext';
 
 const Garage = () => {
   const { fetchCars, setCars, setError } = useContext(GarageContext);
@@ -26,7 +26,7 @@ const Garage = () => {
 
   return (
     <>
-      <Title title="GARAGE" total={totalItems.cars} />
+      <ViewTitle title="GARAGE" total={totalItems.cars} />
       <WinnerModal />
       <Dashboard />
       <Track />

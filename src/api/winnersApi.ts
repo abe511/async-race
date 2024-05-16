@@ -1,13 +1,5 @@
-import { winnersPageLimit } from 'utils/data';
+import { BASE_URL, winnersPageLimit } from 'constants/appData';
 
-const BASE_URL = 'http://127.0.0.1:3000';
-
-// _page=[integer]
-// _limit=[integer]
-// _sort=['id'|'wins'|'time']
-// _order=['ASC'|'DESC']
-// sort = 'wins',
-// order = 'DESC'
 export const getWinners = async (
   page: number,
   setTotalItems: SetState,

@@ -19,6 +19,13 @@
   --track-offset: calc(100vw - var(--car-controls-w) - var(--car-width) - (var(--root-padding) * 2) - (var(--btn-border-w) * 4) - (var(--line-border-w) * 4))
 }
 
+#root {
+  padding: var(--root-padding);
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
 /* resets */
 
 *,

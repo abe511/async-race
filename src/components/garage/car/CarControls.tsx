@@ -1,19 +1,9 @@
 import { useContext } from 'react';
-import styled from 'styled-components';
 import { handleStart, handleStop } from 'utils/carUtils';
 import MainContext from 'components/context/MainContext';
 import GarageContext from 'components/context/GarageContext';
 import WinnersContext from 'components/context/WinnersContext';
-
-const CarControlsContainer = styled.aside`
-  display: grid;
-  grid-column: 1 / 2;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
-  width: var(--car-controls-w);
-`;
-
-// --btn-border-w
+import { CarControlsContainer, CarControlsButton } from 'components/garage/car/CarControls.styled';
 
 type CarControlsProps = {
   id: number;
@@ -28,29 +18,24 @@ const CarControls = ({ id, engineStatus, setEngineStatus, setDuration }: CarCont
   const { winners } = useContext(WinnersContext);
   return (
     <CarControlsContainer>
-      <button type="button" onClick={() => setSelected(id)}>
-        SELECT
-      </button>
-      <button
-        type="button"
+      <CarControlsButton onClick={() => setSelected(id)}>SELECT</CarControlsButton>
+      <CarControlsButton
         onClick={() => removeCar(id, cars, winners, setCars, setError, setTotalItems)}
       >
         REMOVE
-      </button>
-      <button
-        type="button"
+      </CarControlsButton>
+      <CarControlsButton
         onClick={() => handleStart(id, setEngineStatus, setDuration, setError)}
         disabled={engineStatus !== 'stop'}
       >
         START
-      </button>
-      <button
-        type="button"
+      </CarControlsButton>
+      <CarControlsButton
         onClick={() => handleStop(id, setEngineStatus, setError)}
         disabled={engineStatus === 'stop'}
       >
         STOP
-      </button>
+      </CarControlsButton>
     </CarControlsContainer>
   );
 };
