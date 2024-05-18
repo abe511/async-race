@@ -1,5 +1,6 @@
 import { getAllCars } from 'api/garageApi';
 import { getWinners, createWinner, updateWinnerData, deleteWinnerData } from 'api/winnersApi';
+import { defaultWinnerData } from 'constants/appData';
 
 // get current page winners and ALL cars from the server
 // create a hashmap for all cars - {id: {id, name, color}}
@@ -28,7 +29,7 @@ export const fetchWinners: FetchWinners = async (
     }
 
     const localData: WinnerData[] = data.map((winner) => {
-      const { name, color } = carsMap[winner.id] || { name: 'Winner', color: 'white' };
+      const { name, color } = carsMap[winner.id] || defaultWinnerData;
       return { ...winner, name, color };
     });
 
