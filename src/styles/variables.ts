@@ -1,4 +1,4 @@
-export const colors = {
+export const styleColors = {
   primary: '#fff',
   secondary: '#eee',
   active: '#ddd',
@@ -6,13 +6,18 @@ export const colors = {
     dark: '#aaa',
     light: '#ddd',
   },
+  btnText: {
+    primary: 'aqua',
+    secondary: 'aquamarine',
+  },
+
   text: {
     dark: '#555',
     light: '#ddd',
   },
 };
 
-export const spacing = {
+export const size = {
   smallest: '0.25rem',
   small: '0.5rem',
   medium: '1rem',

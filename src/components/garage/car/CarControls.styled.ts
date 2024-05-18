@@ -21,4 +21,9 @@ export const CarControlsButton = styled(ButtonPrimary)`
   line-height: 1rem;
   margin: 0;
   padding: 0;
+  &:disabled {
+    background-color: #333;
+    color: #333;
+    border-color: #555;
+  }
 `;
