@@ -1,4 +1,5 @@
 import { getCars, getCar, createCar, addCars, updateCarData, deleteCarData } from 'api/garageApi';
+import { defaultEngineData } from 'constants/appData';
 import { removeWinner } from './winnersUtils';
 import { makes, models, colors } from '../constants/carData';
 
@@ -8,7 +9,10 @@ export const fetchCars: FetchCars = async (page, setCars, setError, setTotalItem
     if (!data.length) {
       throw new Error('No car data');
     }
-    setCars(data);
+    const localData = data.map((car) => {
+      return { ...car, ...defaultEngineData };
+    });
+    setCars(localData);
   } catch (error) {
     if (error instanceof Error) {
       setError(error.message);

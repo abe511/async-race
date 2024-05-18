@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { CarTitle, Lane, CarAnimated } from 'components/garage/car/Car.styled';
 import CarImage from './CarImage';
 import CarControls from './CarControls';
@@ -12,26 +11,13 @@ type CarProps = {
 };
 
 const Car = ({ id, name, color, status, time }: CarProps) => {
-  const [engineStatus, setEngineStatus] = useState('stop');
-  const [duration, setDuration] = useState(0);
-
-  useEffect(() => {
-    setEngineStatus(status);
-    setDuration(time);
-  }, [status, time]);
-
   return (
     <>
-      <CarControls
-        id={id}
-        engineStatus={engineStatus}
-        setEngineStatus={setEngineStatus}
-        setDuration={setDuration}
-      />
+      <CarControls id={id} status={status} />
       <Lane>
         <CarTitle>{`${id} ${name}`}</CarTitle>
-        <CarAnimated $duration={duration} $status={engineStatus}>
-          <CarImage stroke={color} />
+        <CarAnimated $duration={time} $status={status}>
+          <CarImage stroke={color} status={status} time={time} />
         </CarAnimated>
       </Lane>
     </>

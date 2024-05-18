@@ -72,6 +72,10 @@ type RemoveCar = (
   setTotalItems: SetState
 ) => void;
 
+type HandleStart = (id: number, setCars: SetCars, setError: SetError) => void;
+
+type HandleStop = (id: number, setCars: SetCars, setError: SetError) => void;
+
 type InputSetter = (value: string) => void;
 
 type HandleCreate = (
@@ -142,3 +146,10 @@ type UpdateWinnersList = (
   setWinners: SetState,
   setError: SetError
 ) => void;
+
+type IconProps = {
+  fill: string;
+  stroke: string;
+  width: number | string;
+  height: number | string;
+};
