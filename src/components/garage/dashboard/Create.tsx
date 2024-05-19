@@ -20,7 +20,7 @@ const Create = () => {
     <InputsContainer className="create">
       <InputText
         type="text"
-        placeholder="Enter Make"
+        placeholder="Enter Name"
         value={newName}
         onChange={(e) => handleInputChange(e, setNewName)}
       />

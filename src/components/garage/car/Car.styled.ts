@@ -9,9 +9,19 @@ export const CarTitle = styled.h5`
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
 `;
 
-export const Lane = styled.article`
+export const Lane = styled.article<{ color: string }>`
   grid-column: 2 / 5;
-  border: 1px solid aqua;
+  background-color: #15151515;
+  // box-shadow: 10px 0 10px inset ${({ color }) => color};
+  box-shadow: 10px 0 10px inset #1115;
+  // border: 1px solid aqua;
+  // border: 1px solid darkgray;
+  // border-top-style: dashed;
+  // border-top-width: 3px;
+  // border-bottom-style: dashed;
+  // border-bottom-width: 3px;
+  // border-left-style: none;
+  // border-right-style: none;
   display: flex;
   position: relative;
   height: 3rem;
@@ -33,11 +43,10 @@ export const moveRight = keyframes`
 `;
 
 export const CarAnimated = styled.article<{ $duration: number; $status: string }>`
-  // border: 1px solid yellow;
-  height: 5rem;
+  height: 3rem;
   position: absolute;
   left: 0%;
-  z-index: 1000;
+  z-index: 2000;
   animation: ${({ $status }) => ($status === 'move' || $status === 'pause' ? moveRight : 'none')}
     ${({ $duration }) => $duration}ms linear forwards;
   animation-play-state: ${({ $status }) => ($status === 'pause' ? 'paused' : 'running')};

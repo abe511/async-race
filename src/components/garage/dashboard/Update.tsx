@@ -17,7 +17,7 @@ const Update = () => {
     <InputsContainer className="update">
       <InputText
         type="text"
-        placeholder="Enter Make"
+        placeholder="Enter Name"
         value={updName}
         onChange={(e) => handleInputChange(e, setUpdName)}
       />

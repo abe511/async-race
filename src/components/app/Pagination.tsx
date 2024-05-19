@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { PaginationContainer, PageButton, PageInfo } from 'components/app/Pagination.styled';
 import { handlePrevPage, handleNextPage } from 'utils/pageUtils';
+import { NextIcon, PrevIcon } from 'components/icons/PaginationIcons';
+import { size } from 'styles/variables';
 import GarageContext from '../context/GarageContext';
 import MainContext from '../context/MainContext';
 
@@ -16,7 +18,7 @@ const Pagination = ({ view, limit, total }: PaginationProps) => {
         onClick={() => handlePrevPage(page, view, setCurrentPage, setCars, setError, setTotalItems)}
         disabled={page === 1}
       >
-        prev
+        <PrevIcon fill="" stroke="" width={size.large} height={size.large} disabled={page === 1} />
       </PageButton>
       <PageInfo>
         {page} / {totalPages}
@@ -25,7 +27,13 @@ const Pagination = ({ view, limit, total }: PaginationProps) => {
         onClick={() => handleNextPage(page, view, setCurrentPage, setCars, setError, setTotalItems)}
         disabled={page === totalPages}
       >
-        next
+        <NextIcon
+          fill=""
+          stroke=""
+          width={size.large}
+          height={size.large}
+          disabled={page === totalPages}
+        />
       </PageButton>
     </PaginationContainer>
   );

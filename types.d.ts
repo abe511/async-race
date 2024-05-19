@@ -152,4 +152,5 @@ type IconProps = {
   stroke: string;
   width: number | string;
   height: number | string;
+  disabled: boolean;
 };

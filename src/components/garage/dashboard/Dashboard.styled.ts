@@ -4,6 +4,7 @@ import ButtonPrimary from 'components/app/Button.styled';
 export const DashboardContainer = styled.section`
   border: 1px solid royalblue;
   padding: 0.5rem;
+  margin: 1rem 0;
   border-radius: 0.5rem;
   background-color: #151515;
   color: deepskyblue;
@@ -15,7 +16,7 @@ export const DashboardContainer = styled.section`
 export const ControlsContainer = styled.article`
   display: flex;
   gap: 0.5rem;
-  border: 2px solid darkgoldenrod;
+  // border: 2px solid darkgoldenrod;
   padding: 1rem;
 `;
 
@@ -44,19 +45,16 @@ export const InputText = styled(Input)`
   width: 100%;
   padding-left: 0.5rem;
   text-shadow: 0 0 10px rgba(0, 255, 119, 0.7);
+  &:focus-visible {
+    border-color: lime;
+    box-shadow: 0 0 5px inset rgba(0, 255, 187, 0.5);
+  }
 `;
 
 export const InputColor = styled(Input)`
-  /* border: 2px solid red; */
+  // border: 2px solid red;
   width: 100%;
   min-width: 3rem;
-  /* max-width: 7rem; */
-  /* height: 100%; */
-  /* border-radius: 0.5rem; */
-
-  /* width: 2rem; */
-  /* padding: 0.5rem; */
-  /* height: 2rem; */
 `;
 
 export const InputButton = styled(ButtonPrimary)`
@@ -68,5 +66,6 @@ export const GenerateContainer = styled.article`
 `;
 
 export const GenerateButton = styled(ButtonPrimary)`
-  border: 2px solid chocolate;
+  // border: 2px solid chocolate;
+  padding: 0.7rem 5rem;
 `;

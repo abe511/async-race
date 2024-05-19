@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ViewTitleContainer = styled.section`
-  border: 2px solid violet;
+  // border: 2px solid violet;
   text-align: center;
 `;
 

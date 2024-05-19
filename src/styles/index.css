@@ -1,5 +1,17 @@
+@font-face {
+  font-display: swap;
+  font-family: "Special Speed Agent";
+  src: 
+    url("../assets/fonts/Special-Speed-Agent.eot"); /* IE9 Compat Modes */
+  src: 
+    url("../assets/fonts/Special-Speed-Agent.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../assets/fonts/Special-Speed-Agent.woff") format("woff"), /* Modern Browsers */
+    url("../assets/fonts/Special-Speed-Agent.woff2") format("woff2"), /* Modern Browsers */
+    url("../assets/fonts/Special-Speed-Agent.ttf")  format("truetype"), /* Safari, Android, iOS */
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Special Speed Agent', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,10 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
   --root-padding: 1rem;
   --car-width: 5rem;
-  --car-controls-w: 10rem;
+  --car-controls-w: 5rem;
   --btn-border-w: 1px;
   --line-border-w: 1px;
-  --track-offset: calc(100vw - var(--car-controls-w) - var(--car-width) - (var(--root-padding) * 2) - (var(--btn-border-w) * 4) - (var(--line-border-w) * 4))
+  --track-offset: calc(100vw - var(--car-controls-w) - var(--car-width) - (var(--root-padding) * 2) - (var(--btn-border-w) * 4) - (var(--line-border-w) * 4));
+  --btn-text-primary-color: aqua;
+  --btn-text-secondary-color: aquamarine;
 }
 
 #root {

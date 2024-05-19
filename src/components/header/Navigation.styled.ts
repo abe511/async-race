@@ -4,7 +4,7 @@ import ButtonPrimary from 'components/app/Button.styled';
 export const NavigationContainer = styled.nav`
   display: flex;
   flex-direction: column;
-  border: 2px solid aqua;
+  // border: 2px solid aqua;
   padding: 1rem;
   width: 30%;
   row-gap: 1rem;
@@ -12,7 +12,7 @@ export const NavigationContainer = styled.nav`
 
 export const NavButton = styled(ButtonPrimary)`
   background-color: #151515;
-  border: 1px dashed aquamarine;
+  border: 1px solid aquamarine;
   border-style: outset;
   color: aqua;
   padding: 0.5rem;

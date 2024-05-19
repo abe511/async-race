@@ -6,14 +6,13 @@ export const styleColors = {
     dark: '#aaa',
     light: '#ddd',
   },
-  btnText: {
+  text: {
     primary: 'aqua',
     secondary: 'aquamarine',
   },
-
-  text: {
-    dark: '#555',
-    light: '#ddd',
+  btnText: {
+    primary: 'aqua',
+    secondary: 'aquamarine',
   },
 };
 

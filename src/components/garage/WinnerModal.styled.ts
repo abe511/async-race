@@ -10,7 +10,7 @@ export const ModalOverlay = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(10, 10, 10, 0.7);
-  z-index: 2000;
+  z-index: 3000;
 `;
 
 export const Winner = styled.article`
@@ -19,7 +19,7 @@ export const Winner = styled.article`
   border: 1px solid violet;
   padding: 1rem;
   border-radius: 0.5rem;
-  z-index: 2100;
+  z-index: 3100;
 `;
 
 export const Title = styled.p`

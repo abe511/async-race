@@ -13,8 +13,8 @@ type CarProps = {
 const Car = ({ id, name, color, status, time }: CarProps) => {
   return (
     <>
-      <CarControls id={id} status={status} />
-      <Lane>
+      <CarControls id={id} status={status} color={color} />
+      <Lane color={color}>
         <CarTitle>{`${id} ${name}`}</CarTitle>
         <CarAnimated $duration={time} $status={status}>
           <CarImage stroke={color} status={status} time={time} />

@@ -40,7 +40,7 @@ const tableRows = (winners: WinnerData[]) => {
       <tr key={winner.id}>
         <td>{winner.id}</td>
         <td>
-          <CarImage stroke={winner.color} />
+          <CarImage stroke={winner.color} status="stop" time={winner.time} />
         </td>
         <td>{winner.name}</td>
         <td>{winner.wins}</td>

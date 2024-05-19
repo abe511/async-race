@@ -10,9 +10,12 @@ import { size } from 'styles/variables';
 type CarControlsProps = {
   id: number;
   status: string;
+  color: string;
 };
 
-const CarControls = ({ id, status }: CarControlsProps) => {
+const { medium } = size;
+
+const CarControls = ({ id, status, color }: CarControlsProps) => {
   const { cars, removeCar, setCars, setError, setSelected } = useContext(GarageContext);
   const { setTotalItems } = useContext(MainContext);
   const { winners } = useContext(WinnersContext);
@@ -20,24 +23,24 @@ const CarControls = ({ id, status }: CarControlsProps) => {
   return (
     <CarControlsContainer>
       <CarControlsButton onClick={() => setSelected(id)}>
-        <SelectIcon fill="" stroke="" width={size.medium} height={size.medium} />
+        <SelectIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => handleStart(id, setCars, setError)}
         disabled={status === 'start' || status === 'move' || status === 'pause'}
       >
-        <StartIcon fill="" stroke="" width={size.medium} height={size.medium} />
+        <StartIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => removeCar(id, cars, winners, setCars, setError, setTotalItems)}
       >
-        <RemoveIcon fill="" stroke="" width={size.medium} height={size.medium} />
+        <RemoveIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => handleStop(id, setCars, setError)}
         disabled={status === 'stop' || status === 'stopping' || status === 'start'}
       >
-        <StopIcon fill="" stroke="" width={size.medium} height={size.medium} />
+        <StopIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
       </CarControlsButton>
     </CarControlsContainer>
   );

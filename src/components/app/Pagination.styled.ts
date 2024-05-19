@@ -1,14 +1,22 @@
 import styled from 'styled-components';
-import ButtonPrimary from './Button.styled';
+import { styleColors } from 'styles/variables';
 
 export const PaginationContainer = styled.section`
-  border: 1px solid lime;
+  display: flex;
+  align-self: center;
+  align-items: center;
 `;
 
-export const PageButton = styled(ButtonPrimary)`
-  color: lime;
+export const PageButton = styled.button`
+  display: flex;
+  border-radius: 1rem;
+  margin: 1rem;
 `;
 
 export const PageInfo = styled.span`
-  color: crimson;
+  width: 7rem;
+  text-align: center;
+  color: ${styleColors.text.primary};
+  text-shadow: 0 0 5px ${styleColors.text.secondary};
+  user-select: none;
 `;
