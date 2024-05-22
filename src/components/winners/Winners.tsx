@@ -1,6 +1,7 @@
 import { useEffect, useContext } from 'react';
 import { winnersPageLimit } from 'constants/appData';
 import { fetchWinners } from 'utils/winnersUtils';
+import { AngleUpIcon, AngleDownIcon } from 'components/icons/WinnersIcons';
 import MainContext from '../context/MainContext';
 import GarageContext from '../context/GarageContext';
 import WinnersContext from '../context/WinnersContext';
@@ -15,19 +16,31 @@ const handleSort = (column: string, setSort: SetState) => {
   }));
 };
 
-const tableHeaders = (setSort: SetState) => {
-  const headers = ['№', 'CAR', 'NAME', 'WINS', 'BEST TIME (SECONDS)'];
+const tableHeaders = (sort: SortOrder, setSort: SetState) => {
+  const headers = ['№', 'CAR', 'NAME', 'WINS', 'BEST TIME'];
   return headers.map((header) => {
     if (header === 'WINS')
       return (
         <th key={header} onClick={() => handleSort('wins', setSort)}>
-          WINS
+          <span>WINS</span>
+          {sort.column === 'wins' &&
+            (sort.order === 'ASC' ? (
+              <AngleUpIcon fill="" stroke="" width={24} height={24} disabled={false} />
+            ) : (
+              <AngleDownIcon fill="" stroke="" width={24} height={24} disabled={false} />
+            ))}
         </th>
       );
-    if (header === 'BEST TIME (SECONDS)')
+    if (header === 'BEST TIME')
       return (
         <th key={header} onClick={() => handleSort('time', setSort)}>
-          BEST TIME (SECONDS)
+          <span>BEST TIME</span>
+          {sort.column === 'time' &&
+            (sort.order === 'ASC' ? (
+              <AngleUpIcon fill="" stroke="" width={24} height={24} disabled={false} />
+            ) : (
+              <AngleDownIcon fill="" stroke="" width={24} height={24} disabled={false} />
+            ))}
         </th>
       );
     return <th key={header}>{header}</th>;
@@ -65,7 +78,7 @@ const Winners = () => {
       <ViewTitle title="WINNERS" total={totalItems.winners} />
       <table>
         <thead>
-          <tr>{tableHeaders(setSort)}</tr>
+          <tr>{tableHeaders(sort, setSort)}</tr>
         </thead>
         <tbody>{tableRows(winners)}</tbody>
       </table>
