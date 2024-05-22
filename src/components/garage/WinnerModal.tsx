@@ -1,6 +1,7 @@
 import { useContext } from 'react';
+import { FlagIcon, CupIcon, StopwatchIcon } from 'components/icons/WinnerModalIcons';
 import MainContext from '../context/MainContext';
-import { ModalOverlay, Winner, Title, Text } from './WinnerModal.styled';
+import { ModalOverlay, Display, Title, WinnerName, WinnerTime } from './WinnerModal.styled';
 
 const handleClose = (setWinnerModalData: SetState) => {
   setWinnerModalData((prev: WinnerModal) => ({ ...prev, isOpen: false }));
@@ -10,21 +11,32 @@ const WinnerModal = () => {
   const { winnerModalData, setWinnerModalData } = useContext(MainContext);
 
   if (!winnerModalData.isOpen) return null;
-
   return (
     <ModalOverlay onClick={() => handleClose(setWinnerModalData)}>
-      <Winner>
+      <Display>
         {winnerModalData.id === -1 ? (
-          <Text>No winner</Text>
+          <Title>No winner</Title>
         ) : (
           <>
+            <FlagIcon fill="white" stroke="black" width={96} height={64} disabled={false} />
             <Title>WINNER</Title>
-            <Text>{winnerModalData.id}</Text>
-            <Text>{winnerModalData.name}</Text>
-            <Text>{winnerModalData.time / 1000} seconds</Text>
+            <div>
+              <WinnerName>
+                <CupIcon fill="" stroke="" width={24} height={24} disabled={false} />
+                <span>
+                  {winnerModalData.id} {winnerModalData.name}
+                </span>
+              </WinnerName>
+            </div>
+            <div>
+              <WinnerTime>
+                <StopwatchIcon fill="" stroke="" width={24} height={24} disabled={false} />
+                <span>{winnerModalData.time / 1000}</span>
+              </WinnerTime>
+            </div>
           </>
         )}
-      </Winner>
+      </Display>
     </ModalOverlay>
   );
 };
