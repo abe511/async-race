@@ -8,6 +8,7 @@ import WinnersContext from '../context/WinnersContext';
 import ViewTitle from '../app/ViewTitle';
 import CarImage from '../garage/car/CarImage';
 import Pagination from '../app/Pagination';
+import { Table, Header, Row, Cell } from './Winners.styled';
 
 const handleSort = (column: string, setSort: SetState) => {
   setSort((prev: SortOrder) => ({
@@ -17,48 +18,48 @@ const handleSort = (column: string, setSort: SetState) => {
 };
 
 const tableHeaders = (sort: SortOrder, setSort: SetState) => {
-  const headers = ['№', 'CAR', 'NAME', 'WINS', 'BEST TIME'];
+  const headers = ['Nº', 'CAR', 'NAME', 'WINS', 'BEST TIME'];
   return headers.map((header) => {
     if (header === 'WINS')
       return (
-        <th key={header} onClick={() => handleSort('wins', setSort)}>
+        <Header className="sort-column" key={header} onClick={() => handleSort('wins', setSort)}>
           <span>WINS</span>
           {sort.column === 'wins' &&
             (sort.order === 'ASC' ? (
-              <AngleUpIcon fill="" stroke="" width={24} height={24} disabled={false} />
+              <AngleUpIcon width="1rem" height="1rem" className="sort-icon-position" />
             ) : (
-              <AngleDownIcon fill="" stroke="" width={24} height={24} disabled={false} />
+              <AngleDownIcon width="1rem" height="1rem" className="sort-icon-position" />
             ))}
-        </th>
+        </Header>
       );
     if (header === 'BEST TIME')
       return (
-        <th key={header} onClick={() => handleSort('time', setSort)}>
-          <span>BEST TIME</span>
+        <Header key={header} onClick={() => handleSort('time', setSort)}>
+          <span className="sort-column">BEST TIME</span>
           {sort.column === 'time' &&
             (sort.order === 'ASC' ? (
-              <AngleUpIcon fill="" stroke="" width={24} height={24} disabled={false} />
+              <AngleUpIcon width="1rem" height="1rem" className="sort-icon-position" />
             ) : (
-              <AngleDownIcon fill="" stroke="" width={24} height={24} disabled={false} />
+              <AngleDownIcon width="1rem" height="1rem" className="sort-icon-position" />
             ))}
-        </th>
+        </Header>
       );
-    return <th key={header}>{header}</th>;
+    return <Header key={header}>{header}</Header>;
   });
 };
 
 const tableRows = (winners: WinnerData[]) => {
   return winners.map((winner) => {
     return (
-      <tr key={winner.id}>
-        <td>{winner.id}</td>
-        <td>
+      <Row key={winner.id}>
+        <Cell>{winner.id}</Cell>
+        <Cell>
           <CarImage stroke={winner.color} status="stop" time={winner.time} />
-        </td>
-        <td>{winner.name}</td>
-        <td>{winner.wins}</td>
-        <td>{winner.time}</td>
-      </tr>
+        </Cell>
+        <Cell>{winner.name}</Cell>
+        <Cell>{winner.wins}</Cell>
+        <Cell>{winner.time}</Cell>
+      </Row>
     );
   });
 };
@@ -76,12 +77,12 @@ const Winners = () => {
   return (
     <>
       <ViewTitle title="WINNERS" total={totalItems.winners} />
-      <table>
+      <Table>
         <thead>
-          <tr>{tableHeaders(sort, setSort)}</tr>
+          <Row>{tableHeaders(sort, setSort)}</Row>
         </thead>
         <tbody>{tableRows(winners)}</tbody>
-      </table>
+      </Table>
       <Pagination view="winners" limit={winnersPageLimit} total={totalItems.winners} />
     </>
   );
