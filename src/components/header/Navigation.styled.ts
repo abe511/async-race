@@ -4,9 +4,8 @@ import ButtonPrimary from 'components/app/Button.styled';
 export const NavigationContainer = styled.nav`
   display: flex;
   flex-direction: column;
-  // border: 2px solid aqua;
   padding: 1rem;
-  width: 30%;
+  // width: 30%;
   row-gap: 1rem;
 `;
 
