@@ -14,14 +14,6 @@ export const Lane = styled.article<{ color: string }>`
   background-color: #15151515;
   // box-shadow: 10px 0 10px inset ${({ color }) => color};
   box-shadow: 10px 0 10px inset #1115;
-  // border: 1px solid aqua;
-  // border: 1px solid darkgray;
-  // border-top-style: dashed;
-  // border-top-width: 3px;
-  // border-bottom-style: dashed;
-  // border-bottom-width: 3px;
-  // border-left-style: none;
-  // border-right-style: none;
   display: flex;
   position: relative;
   height: 3rem;
