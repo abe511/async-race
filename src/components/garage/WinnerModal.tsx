@@ -18,11 +18,11 @@ const WinnerModal = () => {
           <Title>No winner</Title>
         ) : (
           <>
-            <FlagIcon fill="white" stroke="black" width={96} height={64} disabled={false} />
+            <FlagIcon fill="white" stroke="black" width={64} height={64} />
             <Title>WINNER</Title>
             <div>
               <WinnerName>
-                <CupIcon fill="" stroke="" width={24} height={24} disabled={false} />
+                <CupIcon width={24} height={24} />
                 <span>
                   {winnerModalData.id} {winnerModalData.name}
                 </span>
@@ -30,7 +30,7 @@ const WinnerModal = () => {
             </div>
             <div>
               <WinnerTime>
-                <StopwatchIcon fill="" stroke="" width={24} height={24} disabled={false} />
+                <StopwatchIcon width={24} height={24} />
                 <span>{winnerModalData.time / 1000}</span>
               </WinnerTime>
             </div>
