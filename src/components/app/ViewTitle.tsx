@@ -3,7 +3,7 @@ import {
   ViewTitleContainer,
   TitleText,
   TotalItems,
-  Subtitle,
+  Message,
 } from 'components/app/ViewTitle.styled';
 import GarageContext from '../context/GarageContext';
 
@@ -19,7 +19,7 @@ const ViewTitle = ({ title, total }: ViewTitleProps) => {
     <ViewTitleContainer>
       <TitleText>{title}</TitleText>
       <TotalItems>{total}</TotalItems>
-      <Subtitle>{error}</Subtitle>
+      <Message>{error}</Message>
     </ViewTitleContainer>
   );
 };
