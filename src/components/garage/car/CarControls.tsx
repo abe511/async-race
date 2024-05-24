@@ -23,24 +23,24 @@ const CarControls = ({ id, status, color }: CarControlsProps) => {
   return (
     <CarControlsContainer>
       <CarControlsButton onClick={() => setSelected(id)}>
-        <SelectIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
+        <SelectIcon fill={color} stroke={color} width={medium} height={medium} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => handleStart(id, setCars, setError)}
         disabled={status === 'start' || status === 'move' || status === 'pause'}
       >
-        <StartIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
+        <StartIcon fill={color} stroke={color} width={medium} height={medium} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => removeCar(id, cars, winners, setCars, setError, setTotalItems)}
       >
-        <RemoveIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
+        <RemoveIcon fill={color} stroke={color} width={medium} height={medium} />
       </CarControlsButton>
       <CarControlsButton
         onClick={() => handleStop(id, setCars, setError)}
         disabled={status === 'stop' || status === 'stopping' || status === 'start'}
       >
-        <StopIcon fill={color} stroke={color} width={medium} height={medium} disabled={false} />
+        <StopIcon fill={color} stroke={color} width={medium} height={medium} />
       </CarControlsButton>
     </CarControlsContainer>
   );
