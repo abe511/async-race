@@ -16,6 +16,7 @@ export const PageButton = styled.button`
 export const PageInfo = styled.span`
   width: 7rem;
   text-align: center;
+  font-family: 'RaceSport';
   color: ${styleColors.text.primary};
   text-shadow: 0 0 5px ${styleColors.text.secondary};
   user-select: none;
