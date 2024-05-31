@@ -1,4 +1,4 @@
-import { BASE_URL, garagePageLimit } from 'constants/appData';
+import { VITE_BASE_URL as BASE_URL, garagePageLimit } from 'constants/appData';
 
 export const addCars = async (payload: NewCarData[]): Promise<CarData[] | []> => {
   try {

@@ -1,4 +1,4 @@
-import { BASE_URL, winnersPageLimit } from 'constants/appData';
+import { VITE_BASE_URL as BASE_URL, winnersPageLimit } from 'constants/appData';
 
 export const getWinners = async (
   page: number,
